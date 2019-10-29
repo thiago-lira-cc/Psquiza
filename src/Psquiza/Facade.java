@@ -7,6 +7,8 @@ public class Facade {
 
 	public Facade() {
 		this.controlePesquisador = new ControllerPesquisador();
+		this.controleProblema = new ControllerProblema();
+		this.controleObjetivo = new ControllerObjetivo();
 	}
 	
 	public void cadastraPesquisador(String nome, String funcao, String biografia, String email, String foto) {

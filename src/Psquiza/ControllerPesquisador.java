@@ -9,9 +9,9 @@ import java.util.Map;
  */
 public class ControllerPesquisador {
 	/**
-	 * Instancia a classe de excessoes
+	 * Instancia a classe de excecoes
 	 */
-	private Excecoes excessoes = new Excecoes();
+	private Excecoes excecoes = new Excecoes();
 	/**
 	 * Mapa de pesquisadores identificados pelo email
 	 */
@@ -31,14 +31,14 @@ public class ControllerPesquisador {
 	 * @param foto
 	 */
 	public void cadastraPesquisador(String nome, String funcao, String biografia, String email, String foto) {
-		excessoes.verificaString(nome, "Campo nome nao pode ser nulo ou vazio.");
-		excessoes.verificaString(funcao, "Campo funcao nao pode ser nulo ou vazio.");
-		excessoes.verificaString(biografia, "Campo biografia nao pode ser nulo ou vazio.");
-		excessoes.verificaString(email, "Campo email nao pode ser nulo ou vazio.");
-		excessoes.verificaString(foto, "Campo fotoURL nao pode ser nulo ou vazio.");
+		excecoes.verificaString(nome, "Campo nome nao pode ser nulo ou vazio.");
+		excecoes.verificaString(funcao, "Campo funcao nao pode ser nulo ou vazio.");
+		excecoes.verificaString(biografia, "Campo biografia nao pode ser nulo ou vazio.");
+		excecoes.verificaString(email, "Campo email nao pode ser nulo ou vazio.");
+		excecoes.verificaString(foto, "Campo fotoURL nao pode ser nulo ou vazio.");
 		
-		excessoes.verificaEmail(email, "Formato de email invalido.");
-		excessoes.verificaURL(foto, "Formato de foto invalido.");
+		excecoes.verificaEmail(email, "Formato de email invalido.");
+		excecoes.verificaURL(foto, "Formato de foto invalido.");
 		
 		if (!pesquisadores.containsKey(email)) {
 			Pesquisador pesquisador = new Pesquisador(nome, funcao, biografia, email, foto);
@@ -53,8 +53,8 @@ public class ControllerPesquisador {
 	 * @return String no formato "Nome (Funcao) - Biografia - Email - FotoURL"
 	 */
 	public String exibePesquisador(String email) {
-		excessoes.verificaString(email, "Campo email nap pode ser vazio ou nulo.");
-		excessoes.verificaEmail(email, "Formato de email invalido.");
+		excecoes.verificaString(email, "Campo email nap pode ser vazio ou nulo.");
+		excecoes.verificaEmail(email, "Formato de email invalido.");
 		if (pesquisadores.containsKey(email)) {
 			return pesquisadores.get(email).toString();
 		}
@@ -67,33 +67,33 @@ public class ControllerPesquisador {
 	 * @param novoValor
 	 */
 	public void alteraPesquisador(String email, String atributo, String novoValor) {
-		excessoes.verificaString(email, "Campo email nao pode ser vazio ou nulo.");
-		excessoes.verificaString(atributo, "Campo atributo nao pode ser vazio ou nulo.");
+		excecoes.verificaString(email, "Campo email nao pode ser vazio ou nulo.");
+		excecoes.verificaString(atributo, "Campo atributo nao pode ser vazio ou nulo.");
 		
-		excessoes.verificaEmail(email, "Formato de email invalido.");
+		excecoes.verificaEmail(email, "Formato de email invalido.");
 		
 		if (pesquisadores.containsKey(email)) {
 			switch (atributo) {
 			case "nome":
-				excessoes.verificaString(novoValor, "Campo nome nao pode ser nulo ou vazio.");
+				excecoes.verificaString(novoValor, "Campo nome nao pode ser nulo ou vazio.");
 				pesquisadores.get(email).setNome(novoValor);
 				break;
 			case "funcao":
-				excessoes.verificaString(novoValor, "Campo funcao nao pode ser nulo ou vazio.");
+				excecoes.verificaString(novoValor, "Campo funcao nao pode ser nulo ou vazio.");
 				pesquisadores.get(email).setFuncao(novoValor);
 				break;
 			case "biografia":
-				excessoes.verificaString(novoValor, "Campo biografia nao pode ser nulo ou vazio.");
+				excecoes.verificaString(novoValor, "Campo biografia nao pode ser nulo ou vazio.");
 				pesquisadores.get(email).setBiografia(novoValor);
 				break;
 			case "fotoURL":
-				excessoes.verificaString(novoValor, "Campo fotoURL nao pode ser nulo ou vazio.");
-				excessoes.verificaURL(novoValor, "Formato de foto invalido.");
+				excecoes.verificaString(novoValor, "Campo fotoURL nao pode ser nulo ou vazio.");
+				excecoes.verificaURL(novoValor, "Formato de foto invalido.");
 				pesquisadores.get(email).setFoto(novoValor);
 				break;
 			case "email":
-				excessoes.verificaString(novoValor, "Campo email nao pode ser nulo ou vazio.");
-				excessoes.verificaEmail(novoValor, "Formato de email invalido.");
+				excecoes.verificaString(novoValor, "Campo email nao pode ser nulo ou vazio.");
+				excecoes.verificaEmail(novoValor, "Formato de email invalido.");
 				Pesquisador pesquisadorAuxiliar = pesquisadores.get(email);
 				pesquisadorAuxiliar.setEmail(novoValor);
 				pesquisadores.remove(email);
@@ -112,8 +112,8 @@ public class ControllerPesquisador {
 	 * @param email
 	 */
 	public void ativaPesquisador(String email) {
-		excessoes.verificaString(email, "Email nao pode ser vazio ou nulo.");
-		excessoes.verificaEmail(email, "Formato de email invalido.");
+		excecoes.verificaString(email, "Email nao pode ser vazio ou nulo.");
+		excecoes.verificaEmail(email, "Formato de email invalido.");
 		if (pesquisadores.containsKey(email)) {
 			if (!pesquisadores.get(email).isStatus()) {
 				pesquisadores.get(email).setStatus(true);
@@ -130,8 +130,8 @@ public class ControllerPesquisador {
 	 * @param email
 	 */
 	public void desativaPesquisador(String email) {
-		excessoes.verificaString(email, "Formato de email invalido.");
-		excessoes.verificaEmail(email, "Formato de email invalido.");
+		excecoes.verificaString(email, "Formato de email invalido.");
+		excecoes.verificaEmail(email, "Formato de email invalido.");
 		if (pesquisadores.containsKey(email)) {
 			if (pesquisadores.get(email).isStatus()) {
 				pesquisadores.get(email).setStatus(false);
@@ -148,8 +148,8 @@ public class ControllerPesquisador {
 	 * @return true ou false
 	 */
 	public boolean pesquisadorEhAtivado(String email) {
-		excessoes.verificaString(email, "Email nao pode ser vazio ou nulo.");
-		excessoes.verificaEmail(email, "Formato de email invalido.");
+		excecoes.verificaString(email, "Email nao pode ser vazio ou nulo.");
+		excecoes.verificaEmail(email, "Formato de email invalido.");
 		if (pesquisadores.containsKey(email)) {
 			return pesquisadores.get(email).isStatus();
 		}
