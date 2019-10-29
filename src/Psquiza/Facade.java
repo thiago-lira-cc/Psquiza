@@ -1,16 +1,35 @@
 package Psquiza;
 
 public class Facade {
+	private ControllerPesquisa controlePesquisa;
 	private ControllerPesquisador controlePesquisador;
 	private ControllerProblema controleProblema;
 	private ControllerObjetivo controleObjetivo;
 
 	public Facade() {
+		this.controlePesquisa = new ControllerPesquisa();
 		this.controlePesquisador = new ControllerPesquisador();
-		this.controleProblema = new ControllerProblema();
-		this.controleObjetivo = new ControllerObjetivo();
+	}
+	public String cadastraPesquisa(String descricao, String campoDeInteresse) {
+		return controlePesquisa.cadastraPesquisa(descricao, campoDeInteresse);
 	}
 	
+	public void alteraPesquisa(String codigo, String conteudo, String novoConteudo) {
+		controlePesquisa.alteraPesquisa(codigo, conteudo, novoConteudo);
+	}
+	
+	public void encerraPesquisa(String codigo, String motivo) {
+		controlePesquisa.encerraPesquisa(codigo, motivo);
+	}
+	public void ativaPesquisa(String codigo) {
+		controlePesquisa.ativaPesquisa(codigo);
+	}
+	public String exibePesquisa(String codigo) {
+		return controlePesquisa.exibePesquisa(codigo);
+	}
+	public boolean pesquisaEhAtiva(String codigo) {
+		return controlePesquisa.pesquisaEhAtiva(codigo);
+	}
 	public void cadastraPesquisador(String nome, String funcao, String biografia, String email, String foto) {
 		controlePesquisador.cadastraPesquisador(nome, funcao, biografia, email, foto);
 	}

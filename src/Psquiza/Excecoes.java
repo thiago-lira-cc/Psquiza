@@ -51,34 +51,14 @@ public class Excecoes {
 	}
 	
 	/**
-	 * Verifica se um valor inteiro eh valido
+	 * Verifica se a viabilidade eh valida
 	 * Um valor deve ser maior igual a 1 e menor igual
 	 * a 5
-	 * @param valor
+	 * @param viabilidade
 	 * @param msg
 	 */
-	public void verificaValor(Integer valor, String msg) {
-		if (!(valor>=1 && valor<=5)) {
-			throw new IllegalArgumentException(msg);
-		}
-	}
-	/**
-	 * Verifica se o campo valor eh vazio ou nulo
-	 * @param valor
-	 * @param msg
-	 */
-	public void verificaInteiro(Integer valor, String msg) {
-		if (valor.equals("") || valor==null) {
-			throw new IllegalArgumentException(msg);
-		}
-	}
-	/**
-	 * Verifica se o tipo de um objetivo eh valido
-	 * @param tipo
-	 * @param msg
-	 */
-	public void verificaTipo(String tipo, String msg) {
-		if (!(tipo.equalsIgnoreCase("geral") || tipo.equalsIgnoreCase("especifico"))) {
+	public void verificaValor(int viabilidade, String msg) {
+		if (!(viabilidade>=1 && viabilidade<=5)) {
 			throw new IllegalArgumentException(msg);
 		}
 	}
