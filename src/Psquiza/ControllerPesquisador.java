@@ -11,7 +11,7 @@ public class ControllerPesquisador {
 	/**
 	 * Instancia a classe de excessoes
 	 */
-	private Excessoes excessoes = new Excessoes();
+	private Excecoes excessoes = new Excecoes();
 	/**
 	 * Mapa de pesquisadores identificados pelo email
 	 */

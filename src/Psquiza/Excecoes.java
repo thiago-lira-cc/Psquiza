@@ -4,14 +4,14 @@ package Psquiza;
  * @author Thiago Lira, Kleberson Maria, Ricardo Felix e Iele Passos
  *
  */
-public class Excessoes {
+public class Excecoes {
 	/**
 	 * Verifica se uma string é vazia ou nula
 	 * @param atributo
 	 * @param msg
 	 */
 	public void verificaString(String atributo, String msg) {
-		if (atributo==null|atributo.equals("")) {
+		if (atributo==null||atributo.equals("")) {
 			throw new IllegalArgumentException(msg);
 		}
 	}
@@ -48,6 +48,19 @@ public class Excessoes {
 			throw new IllegalArgumentException(msg);
 		}
 		
+	}
+	
+	/**
+	 * Verifica se a viabilidade eh valida
+	 * Um valor deve ser maior igual a 1 e menor igual
+	 * a 5
+	 * @param viabilidade
+	 * @param msg
+	 */
+	public void verificaValor(int viabilidade, String msg) {
+		if (!(viabilidade>=1 && viabilidade<=5)) {
+			throw new IllegalArgumentException(msg);
+		}
 	}
 	
 }

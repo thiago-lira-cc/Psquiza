@@ -2,6 +2,8 @@ package Psquiza;
 
 public class Facade {
 	private ControllerPesquisador controlePesquisador;
+	private ControllerProblema controleProblema;
+	private ControllerObjetivo controleObjetivo;
 
 	public Facade() {
 		this.controlePesquisador = new ControllerPesquisador();
@@ -29,5 +31,29 @@ public class Facade {
 	
 	public boolean pesquisadorEhAtivo(String email) {
 		return controlePesquisador.pesquisadorEhAtivado(email);
+	}
+	
+	public String cadastraProblema(String descricao, int viabilidade) {
+		return controleProblema.cadastraProblema(descricao, viabilidade);
+	}
+		
+	public String exibeProblema(String codigo) {
+		return controleProblema.exibeProblema(codigo);
+	}
+	
+	public void apagarProblema(String codigo) {
+		controleProblema.apagarProblema(codigo);
+	}
+	
+	public String cadastraObjetivo(String tipo, String descricao, int aderencia, int viabilidade) {
+		return controleObjetivo.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
+	}
+	
+	public String exibeObjetivo(String codigo) {
+		return controleObjetivo.exibeObjetivo(codigo);
+	}
+	
+	public void apagarObjetivo(String codigo) {
+		controleObjetivo.apagarObjetivo(codigo);
 	}
 }
