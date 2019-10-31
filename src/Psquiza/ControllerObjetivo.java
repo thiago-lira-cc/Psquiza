@@ -65,17 +65,15 @@ public class ControllerObjetivo {
 	 * @param viabilidade
 	 * @return o codigo identificador
 	 */
-	public String cadastraObjetivo(String tipo, String descricao, Integer aderencia, Integer viabilidade) {
+	public String cadastraObjetivo(String tipo, String descricao, int aderencia, int viabilidade) {
 		excecoes.verificaString(tipo, "Campo tipo nao pode ser nulo ou vazio.");
 		excecoes.verificaTipo(tipo, "Valor invalido de tipo.");
 		excecoes.verificaString(descricao, "Campo descricao nao pode ser nulo ou vazio.");
-		excecoes.verificaInteiro(aderencia, "Campo aderencia nao pode ser nulo ou vazio.");
-		excecoes.verificaInteiro(viabilidade, "Campo viabilidade nao pode ser nulo ou vazio.");
 		excecoes.verificaValor(aderencia, "Valor invalido de aderencia");
 		excecoes.verificaValor(viabilidade, "Valor invalido de viabilidade.");
 		String codigo = geraCodigo();
 
-		if (objetivoJaCadastrado(codigo)) {
+		if (objetivoJaCadastrado(codigo)==false) {
 			Objetivo o = new Objetivo(codigo, tipo, descricao, aderencia, viabilidade);
 			objetivos.put(codigo, o);
 			return codigo;
@@ -84,10 +82,6 @@ public class ControllerObjetivo {
 		}
 	}
 
-	public String cadastraObjetivo(String tipo, String descricao, int aderencia, int viabilidade) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	/**
 	 * Metodo responsavel por imprimir um objetivo a partir
 	 * do seu codigo identificador
@@ -101,7 +95,6 @@ public class ControllerObjetivo {
 			return pegaObjetivo(codigo).toString();
 		}
 		throw new IllegalArgumentException("Objetivo nao encontrado");
-		// TODO Auto-generated method stub
 	}
 	/**
 	 * Metodo responsavel por apagar um objetivo a partir
@@ -113,8 +106,9 @@ public class ControllerObjetivo {
 		excecoes.verificaString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 		if (objetivoJaCadastrado(codigo)) {
 			objetivos.remove(codigo);
+		} else {
+			throw new IllegalArgumentException("Objetivo nao encontrado");
 		}
-		throw new IllegalArgumentException("Objetivo nao encontrado");
 
 
 	}

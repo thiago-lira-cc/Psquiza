@@ -17,6 +17,8 @@ public class Facade {
 	public Facade() {
 		this.controlePesquisa = new ControllerPesquisa();
 		this.controlePesquisador = new ControllerPesquisador();
+		this.controleProblema = new ControllerProblema();
+		this.controleObjetivo = new ControllerObjetivo();
 	}
 	
 	public String cadastraPesquisa(String descricao, String campoDeInteresse) {

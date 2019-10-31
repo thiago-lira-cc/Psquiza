@@ -15,8 +15,8 @@ public class ControllerProblema {
 	}
 	
 	public String geraCodigo() {
-		int valor = contCodigo+1;
-		return "P"+valor;
+		contCodigo++;
+		return "P"+contCodigo;
 	}
 	
 	public boolean problemaJaCadastrado(String codigo) {
@@ -28,30 +28,35 @@ public class ControllerProblema {
 	}
 
 	public String cadastraProblema(String descricao, int viabilidade) {
-		excecoes.verificaString(descricao, "");
-		excecoes.verificaValor(viabilidade, "");
+		excecoes.verificaString(descricao, "Campo descricao nao pode ser nulo ou vazio.");
+		excecoes.verificaValor(viabilidade, "Valor invalido de viabilidade.");
+		
 		String codigo = geraCodigo();
 		Problema p = new Problema(codigo, descricao, viabilidade);
-		if (problemaJaCadastrado(codigo)) {
+		if (problemaJaCadastrado(codigo)==false) {
 			this.problemas.put(codigo, p);
 			return codigo;
 		} else {
-			throw new IllegalArgumentException("");
+			throw new IllegalArgumentException("Problema ja existe");
 		}
 	}
 
 	public String exibeProblema(String codigo) {
+		excecoes.verificaString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 		if (problemaJaCadastrado(codigo)) {
 			return pegaProblema(codigo).toString();
 		} 
-		throw new IllegalArgumentException("");
+		throw new IllegalArgumentException("Problema nao encontrado");
 	}
 
 	public void apagarProblema(String codigo) {
+		excecoes.verificaString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 		if (problemaJaCadastrado(codigo)) {
 			problemas.remove(codigo);
+		} else {
+			throw new IllegalArgumentException("Problema nao encontrado");
 		}
-		throw new IllegalArgumentException("");
+		
 	}
 
 }
