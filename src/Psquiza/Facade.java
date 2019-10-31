@@ -1,15 +1,24 @@
 package Psquiza;
 
+import easyaccept.EasyAccept;
+
 public class Facade {
 	private ControllerPesquisa controlePesquisa;
 	private ControllerPesquisador controlePesquisador;
 	private ControllerProblema controleProblema;
 	private ControllerObjetivo controleObjetivo;
 
+	public static void main(String[] args) {
+		args = new String[] {"Psquiza.Facade", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",
+							"testes_aceitacao/use_case_3.txt", "testes_aceitacao/use_case_4.txt"};
+		EasyAccept.main(args);
+	}
+	
 	public Facade() {
 		this.controlePesquisa = new ControllerPesquisa();
 		this.controlePesquisador = new ControllerPesquisador();
 	}
+	
 	public String cadastraPesquisa(String descricao, String campoDeInteresse) {
 		return controlePesquisa.cadastraPesquisa(descricao, campoDeInteresse);
 	}
