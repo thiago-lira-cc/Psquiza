@@ -68,30 +68,30 @@ public class ControllerPesquisador {
 	 */
 	public void alteraPesquisador(String email, String atributo, String novoValor) {
 		excessoes.verificaString(email, "Campo email nao pode ser vazio ou nulo.");
-		excessoes.verificaString(atributo, "Campo atributo nao pode ser vazio ou nulo.");
+		excessoes.verificaString(atributo, "Atributo nao pode ser vazio ou nulo.");
 		
 		excessoes.verificaEmail(email, "Formato de email invalido.");
 		
 		if (pesquisadores.containsKey(email)) {
 			switch (atributo) {
-			case "nome":
+			case "NOME":
 				excessoes.verificaString(novoValor, "Campo nome nao pode ser nulo ou vazio.");
 				pesquisadores.get(email).setNome(novoValor);
 				break;
-			case "funcao":
+			case "FUNCAO":
 				excessoes.verificaString(novoValor, "Campo funcao nao pode ser nulo ou vazio.");
 				pesquisadores.get(email).setFuncao(novoValor);
 				break;
-			case "biografia":
+			case "BIOGRAFIA":
 				excessoes.verificaString(novoValor, "Campo biografia nao pode ser nulo ou vazio.");
 				pesquisadores.get(email).setBiografia(novoValor);
 				break;
-			case "fotoURL":
+			case "FOTO":
 				excessoes.verificaString(novoValor, "Campo fotoURL nao pode ser nulo ou vazio.");
 				excessoes.verificaURL(novoValor, "Formato de foto invalido.");
 				pesquisadores.get(email).setFoto(novoValor);
 				break;
-			case "email":
+			case "EMAIL":
 				excessoes.verificaString(novoValor, "Campo email nao pode ser nulo ou vazio.");
 				excessoes.verificaEmail(novoValor, "Formato de email invalido.");
 				Pesquisador pesquisadorAuxiliar = pesquisadores.get(email);
