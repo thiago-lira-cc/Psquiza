@@ -74,5 +74,26 @@ public class Excecoes {
 			throw new IllegalArgumentException(msg);
 		}
 	}
-	
+	/**
+	 * Verifica se o Campo de Interesse de uma pesquisa esta num formato valido
+	 * @param campoDeInteresse
+	 * @param msg
+	 */
+	public void verificaCampo(String campoDeInteresse, String msg) {
+		String[] separados = campoDeInteresse.split(",");
+		if(campoDeInteresse.length() > 255) {
+			throw new IllegalArgumentException(msg);
+		}else{
+			if(separados.length > 4) {
+				throw new IllegalArgumentException(msg);
+			}else {
+				for(int i= 0;i < separados.length;i++) {
+					if(separados[i].length() < 3 || separados[i].equals("")) {
+						throw new IllegalArgumentException(msg);
+					}
+				}
+			}
+		}
+	}
 }
+	
