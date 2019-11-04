@@ -7,6 +7,7 @@ public class Facade {
 	private ControllerPesquisador controlePesquisador;
 	private ControllerProblema controleProblema;
 	private ControllerObjetivo controleObjetivo;
+	private ControllerAtividade controleAtividade;
 
 	public static void main(String[] args) {
 		args = new String[] {"Psquiza.Facade", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",
@@ -19,6 +20,7 @@ public class Facade {
 		this.controlePesquisador = new ControllerPesquisador();
 		this.controleProblema = new ControllerProblema();
 		this.controleObjetivo = new ControllerObjetivo();
+		this.controleAtividade =  new ControllerAtividade();
 	}
 	
 	public String cadastraPesquisa(String descricao, String campoDeInteresse) {
@@ -88,4 +90,21 @@ public class Facade {
 	public void apagarObjetivo(String codigo) {
 		controleObjetivo.apagarObjetivo(codigo);
 	}
+	
+	public void cadastraAtividade(String descricao, String nivelRisco,String descricaoRisco) {
+		controleAtividade.cadastraAtividade(descricao, nivelRisco, descricaoRisco);
+	}
+	
+	public void apagaAtividade(String codigo) {
+		controleAtividade.apagaAtividade(codigo);
+	}
+	
+	public void cadastraItem(String codigo, String item) {
+		controleAtividade.cadastraItem(codigo, item);
+	}
+	
+	public void exibeAtividade(String codigo) {
+		controleAtividade.exibeAtividade(codigo);
+	}
+	
 }
