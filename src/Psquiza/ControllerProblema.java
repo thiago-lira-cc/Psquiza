@@ -1,6 +1,9 @@
 package Psquiza;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ControllerProblema {
@@ -61,6 +64,18 @@ public class ControllerProblema {
 
 	public Map<String, Problema> getProblemas() {
 		return this.problemas;
+	}
+
+	public List<Busca> buscaProblema(String termo) {
+		List<Busca> resultados = new ArrayList<Busca>();
+		for (Problema problema : problemas.values()) {
+			if (problema.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
+				Busca busca = new Busca(problema.getCodigo(), problema.getDescricao());
+				resultados.add(busca);
+			}
+		}
+		Collections.sort(resultados);
+		return resultados;
 	}
 
 }

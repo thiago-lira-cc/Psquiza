@@ -91,6 +91,10 @@ public class Atividade {
 	public String getDescricaoRisco() {
 		return this.descricaoRisco;
 	}
+
+	public String getCodigo() {
+		return codigo;
+	}
 	
 	
 

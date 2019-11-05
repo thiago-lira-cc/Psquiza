@@ -6,7 +6,7 @@ package Psquiza;
  * @author Iele Passos
  *
  */
-public class Pesquisa {
+public class Pesquisa{
 	/**
 	 * A descricao da pesquisa.
 	 */
@@ -68,6 +68,10 @@ public class Pesquisa {
 	@Override
 	public String toString() {
 		return codigo + " - " + descricao +" - "+ campoDeInteresse;
+	}
+
+	public String getCodigo() {
+		return this.codigo;
 	}
 
 }

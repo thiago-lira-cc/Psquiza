@@ -1,6 +1,9 @@
 package Psquiza;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ControllerPesquisa {
@@ -132,5 +135,21 @@ public class ControllerPesquisa {
 
 	public Map<String, Pesquisa> getPesquisas() {
 		return this.pesquisas;
+	}
+	
+	public List<Busca> buscaPesquisa(String termo){
+		List<Busca> resultados = new ArrayList<Busca>();
+		for (Pesquisa pesquisa : pesquisas.values()) {
+			if (pesquisa.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
+				Busca busca = new Busca(pesquisa.getCodigo(), pesquisa.getDescricao());
+				resultados.add(busca);
+			}
+			if (pesquisa.getCampoDeInteresse().toLowerCase().contains(termo.toLowerCase())) {
+				Busca busca = new Busca(pesquisa.getCodigo(), pesquisa.getCampoDeInteresse());
+				resultados.add(busca);
+			}
+		}
+		Collections.sort(resultados);
+		return resultados;
 	}
 }

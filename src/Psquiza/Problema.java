@@ -18,5 +18,9 @@ public class Problema {
 	public String getDescricao() {
 		return this.descricao;
 	}
+	
+	public String getCodigo() {
+		return this.codigo;
+	}
 
 }

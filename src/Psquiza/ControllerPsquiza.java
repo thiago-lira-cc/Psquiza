@@ -1,6 +1,6 @@
 package Psquiza;
 
-import java.util.Map;
+import java.util.List;
 
 public class ControllerPsquiza {
 	private Excecoes excecoes;
@@ -17,60 +17,6 @@ public class ControllerPsquiza {
 		this.controleProblema = new ControllerProblema();
 		this.controleObjetivo = new ControllerObjetivo();
 		this.controleAtividade =  new ControllerAtividade();
-	}
-	
-	public String busca(String termo) {
-		excecoes.verificaString(termo, "Campo termo nao pode ser nulo ou vazio.");
-		
-		String strFinal = "";
-		
-		Map<String, Pesquisa> pesquisas = controlePesquisa.getPesquisas();
-		for (String chaveDaPesquisa : pesquisas.keySet()) {
-			if (pesquisas.get(chaveDaPesquisa).getDescricao().toLowerCase().contains(termo.toLowerCase())) {
-				strFinal += chaveDaPesquisa +": "+ pesquisas.get(chaveDaPesquisa).getDescricao() + " | ";
-			}
-			
-			if (pesquisas.get(chaveDaPesquisa).getCampoDeInteresse().toLowerCase().contains(termo.toLowerCase())) {
-				strFinal += chaveDaPesquisa +": "+ pesquisas.get(chaveDaPesquisa).getCampoDeInteresse()+ " | ";
-			}
-		}
-		
-		Map<String, Pesquisador> pesquisadores = controlePesquisador.getPesquisadores();
-		for (String chaveDoPesquisador : pesquisadores.keySet()) {
-			if (pesquisadores.get(chaveDoPesquisador).getBiografia().toLowerCase().contains(termo.toLowerCase())) {
-				System.out.println(pesquisadores.get(chaveDoPesquisador).getBiografia().toLowerCase().contains(termo.toLowerCase()));
-				strFinal += chaveDoPesquisador +": "+ pesquisadores.get(chaveDoPesquisador).getBiografia()+ " | ";
-			}
-	
-		}
-		
-		Map<String, Problema> problemas = controleProblema.getProblemas();
-		for (String chaveDoProblema : problemas.keySet()) {
-			if (problemas.get(chaveDoProblema).getDescricao().toLowerCase().contains(termo.toLowerCase())) {
-				strFinal += chaveDoProblema +": "+ problemas.get(chaveDoProblema).getDescricao() + " | ";
-			}
-		}
-		
-		Map<String, Objetivo> objetivos = controleObjetivo.getObjetivos();
-		for (String chaveDoObjetivo : objetivos.keySet()) {
-			if (objetivos.get(chaveDoObjetivo).getDescricao().toLowerCase().contains(termo.toLowerCase())) {
-				strFinal += chaveDoObjetivo +": "+ objetivos.get(chaveDoObjetivo).getDescricao() + " | ";
-			}
-		}
-		
-		Map<String, Atividade> atividades = controleAtividade.getAtividades();
-		for (String chaveDaAtividade : atividades.keySet()) {
-			if (atividades.get(chaveDaAtividade).getDescricao().toLowerCase().contains(termo.toLowerCase())) {
-				strFinal += chaveDaAtividade +": "+ atividades.get(chaveDaAtividade).getDescricao()+" | ";
-			}
-			
-			if (atividades.get(chaveDaAtividade).getDescricaoRisco().toLowerCase().contains(termo.toLowerCase())) {
-				strFinal += chaveDaAtividade +": "+ atividades.get(chaveDaAtividade).getDescricaoRisco()+" | ";
-			}
-		}
-		
-		strFinal = strFinal.substring(0, strFinal.length()-3);
-		return strFinal;
 	}
 
 	public String cadastraPesquisa(String descricao, String campoDeInteresse) {
@@ -159,5 +105,56 @@ public class ControllerPsquiza {
 	
 	public String exibeAtividade(String codigo) {
 		return controleAtividade.exibeAtividade(codigo);
+	}
+	
+	public String busca(String termo) {
+		excecoes.verificaString(termo, "Campo termo nao pode ser nulo ou vazio.");
+		
+		String strFinal = "";
+		/*
+		 * Pesquisa
+		 */
+		List<Busca> listaDePesquisas = controlePesquisa.buscaPesquisa(termo);
+		
+		for (int i = listaDePesquisas.size()-1; i >=0; i--) {
+			strFinal += listaDePesquisas.get(i).toString()+ " | ";
+		}
+		/*
+		 * Pesquisador
+		 */
+		List<Busca> listaDePesquisadores = controlePesquisador.buscaPesquisador(termo);
+		
+		for (int i = listaDePesquisadores.size()-1; i >=0; i--) {
+			strFinal += listaDePesquisadores.get(i).toString()+ " | ";
+		}
+		/*
+		 * Problema
+		 */
+		List<Busca> listaDeProblemas = controleProblema.buscaProblema(termo);
+		
+		for (int i = listaDeProblemas.size()-1; i >=0; i--) {
+			strFinal += listaDeProblemas.get(i).toString()+ " | ";
+		}
+		/*
+		 * Objetivo
+		 */
+		
+		List<Busca> listaDeObjetivos = controleObjetivo.buscaObjetivo(termo);
+		
+		for (int i = listaDeObjetivos.size()-1; i >=0; i--) {
+			strFinal += listaDeObjetivos.get(i).toString()+ " | ";
+		}
+		/*
+		 * Atividade
+		 */
+		
+		List<Busca> listaDeAtividade = controleAtividade.buscaAtividade(termo);
+		
+		for (int i = listaDeAtividade.size()-1; i >=0; i--) {
+			strFinal += listaDeAtividade.get(i).toString()+ " | ";
+		}
+		
+		strFinal = strFinal.substring(0, strFinal.length()-3);
+		return strFinal;
 	}
 }

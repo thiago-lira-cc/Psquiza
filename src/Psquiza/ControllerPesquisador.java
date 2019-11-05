@@ -1,6 +1,9 @@
 package Psquiza;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 /**
  * Controller responsavel pelas operacoes nos pesquisadores
@@ -157,6 +160,17 @@ public class ControllerPesquisador {
 	}
 	public Map<String, Pesquisador> getPesquisadores() {
 		return this.pesquisadores;
+	}
+	public List<Busca> buscaPesquisador(String termo) {
+		List<Busca> resultados = new ArrayList<Busca>();
+		for (Pesquisador pesquisador : pesquisadores.values()) {
+			if (pesquisador.getBiografia().toLowerCase().contains(termo.toLowerCase())) {
+				Busca busca = new Busca(pesquisador.getEmail(), pesquisador.getBiografia());
+				resultados.add(busca);
+			}
+		}
+		Collections.sort(resultados);
+		return resultados;
 	}
 
 }

@@ -1,5 +1,8 @@
 package Psquiza;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 /**
  * Controller responsavel por gerenciar operacoes
@@ -114,6 +117,17 @@ public class ControllerObjetivo {
 	}
 	public Map<String, Objetivo> getObjetivos() {
 		return this.objetivos;
+	}
+	public List<Busca> buscaObjetivo(String termo) {
+		List<Busca> resultados = new ArrayList<Busca>();
+		for (Objetivo objetivo : objetivos.values()) {
+			if (objetivo.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
+				Busca busca = new Busca(objetivo.getCodigo(), objetivo.getDescricao());
+				resultados.add(busca);
+			}
+		}
+		Collections.sort(resultados);
+		return resultados;
 	}
 
 }

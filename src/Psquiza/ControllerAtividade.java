@@ -1,6 +1,9 @@
 package Psquiza;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ControllerAtividade {
@@ -70,7 +73,20 @@ public class ControllerAtividade {
 	}
 
 
-	
-	
-	
+	public List<Busca> buscaAtividade(String termo) {
+		List<Busca> resultados = new ArrayList<Busca>();
+		for (Atividade atividade : atividades.values()) {
+			if (atividade.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
+				Busca busca = new Busca(atividade.getCodigo(), atividade.getDescricao());
+				resultados.add(busca);
+			}
+			if (atividade.getDescricaoRisco().toLowerCase().contains(termo.toLowerCase())) {
+				Busca busca = new Busca(atividade.getCodigo(), atividade.getDescricaoRisco());
+				resultados.add(busca);
+			}
+		}
+		Collections.sort(resultados);
+		return resultados;
+	}
+
 }

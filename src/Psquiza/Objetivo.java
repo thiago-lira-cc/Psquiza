@@ -76,4 +76,7 @@ public class Objetivo {
 		return this.descricao;
 	}
 	
+	public String getCodigo() {
+		return this.codigo;
+	}
 }
