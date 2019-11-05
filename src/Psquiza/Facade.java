@@ -3,11 +3,8 @@ package Psquiza;
 import easyaccept.EasyAccept;
 
 public class Facade {
-	private ControllerPesquisa controlePesquisa;
-	private ControllerPesquisador controlePesquisador;
-	private ControllerProblema controleProblema;
-	private ControllerObjetivo controleObjetivo;
-	private ControllerAtividade controleAtividade;
+	
+	private ControllerPsquiza controlePsquiza;
 
 	public static void main(String[] args) {
 		args = new String[] {"Psquiza.Facade", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",
@@ -18,96 +15,94 @@ public class Facade {
 	}
 	
 	public Facade() {
-		this.controlePesquisa = new ControllerPesquisa();
-		this.controlePesquisador = new ControllerPesquisador();
-		this.controleProblema = new ControllerProblema();
-		this.controleObjetivo = new ControllerObjetivo();
-		this.controleAtividade =  new ControllerAtividade();
+		this.controlePsquiza = new ControllerPsquiza();
 	}
 	
 	public String cadastraPesquisa(String descricao, String campoDeInteresse) {
-		return controlePesquisa.cadastraPesquisa(descricao, campoDeInteresse);
+		return controlePsquiza.cadastraPesquisa(descricao, campoDeInteresse);
 	}
 	
 	public void alteraPesquisa(String codigo, String conteudo, String novoConteudo) {
-		controlePesquisa.alteraPesquisa(codigo, conteudo, novoConteudo);
+		controlePsquiza.alteraPesquisa(codigo, conteudo, novoConteudo);
 	}
 	
 	public void encerraPesquisa(String codigo, String motivo) {
-		controlePesquisa.encerraPesquisa(codigo, motivo);
+		controlePsquiza.encerraPesquisa(codigo, motivo);
 	}
 	public void ativaPesquisa(String codigo) {
-		controlePesquisa.ativaPesquisa(codigo);
+		controlePsquiza.ativaPesquisa(codigo);
 	}
 	public String exibePesquisa(String codigo) {
-		return controlePesquisa.exibePesquisa(codigo);
+		return controlePsquiza.exibePesquisa(codigo);
 	}
 	public boolean pesquisaEhAtiva(String codigo) {
-		return controlePesquisa.pesquisaEhAtiva(codigo);
+		return controlePsquiza.pesquisaEhAtiva(codigo);
 	}
 	public void cadastraPesquisador(String nome, String funcao, String biografia, String email, String foto) {
-		controlePesquisador.cadastraPesquisador(nome, funcao, biografia, email, foto);
+		controlePsquiza.cadastraPesquisador(nome, funcao, biografia, email, foto);
 	}
 	
 	public void desativaPesquisador(String email) {
-		controlePesquisador.desativaPesquisador(email);
+		controlePsquiza.desativaPesquisador(email);
 	}
 	
 	public String exibePesquisador(String email) {
-		return controlePesquisador.exibePesquisador(email);
+		return controlePsquiza.exibePesquisador(email);
 	}
 	
 	public void alteraPesquisador(String email, String atributo, String novoValor) {
-		controlePesquisador.alteraPesquisador(email, atributo, novoValor);
+		controlePsquiza.alteraPesquisador(email, atributo, novoValor);
 	}
 	
 	public void ativaPesquisador(String email) {
-		controlePesquisador.ativaPesquisador(email);
+		controlePsquiza.ativaPesquisador(email);
 	}
 	
 	public boolean pesquisadorEhAtivo(String email) {
-		return controlePesquisador.pesquisadorEhAtivado(email);
+		return controlePsquiza.pesquisadorEhAtivado(email);
 	}
 	
 	public String cadastraProblema(String descricao, int viabilidade) {
-		return controleProblema.cadastraProblema(descricao, viabilidade);
+		return controlePsquiza.cadastraProblema(descricao, viabilidade);
 	}
 		
 	public String exibeProblema(String codigo) {
-		return controleProblema.exibeProblema(codigo);
+		return controlePsquiza.exibeProblema(codigo);
 	}
 	
 	public void apagarProblema(String codigo) {
-		controleProblema.apagarProblema(codigo);
+		controlePsquiza.apagarProblema(codigo);
 	}
 	
 	public String cadastraObjetivo(String tipo, String descricao, int aderencia, int viabilidade) {
-		return controleObjetivo.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
+		return controlePsquiza.cadastraObjetivo(tipo, descricao, aderencia, viabilidade);
 	}
 	
 	public String exibeObjetivo(String codigo) {
-		return controleObjetivo.exibeObjetivo(codigo);
+		return controlePsquiza.exibeObjetivo(codigo);
 	}
 	
 	public void apagarObjetivo(String codigo) {
-		controleObjetivo.apagarObjetivo(codigo);
+		controlePsquiza.apagarObjetivo(codigo);
 	}
 	
 	public void cadastraAtividade(String descricao, String nivelRisco,String descricaoRisco) {
-		controleAtividade.cadastraAtividade(descricao, nivelRisco, descricaoRisco);
+		controlePsquiza.cadastraAtividade(descricao, nivelRisco, descricaoRisco);
 	}
 	
 	public void apagaAtividade(String codigo) {
-		controleAtividade.apagaAtividade(codigo);
+		controlePsquiza.apagaAtividade(codigo);
 	}
 	
 	public void cadastraItem(String codigo, String item) {
-		controleAtividade.cadastraItem(codigo, item);
+		controlePsquiza.cadastraItem(codigo, item);
 	}
 	
 	public String exibeAtividade(String codigo) {
-		return controleAtividade.exibeAtividade(codigo);
+		return controlePsquiza.exibeAtividade(codigo);
 	}
 	
-	
+	public String busca(String termo) {
+		return controlePsquiza.busca(termo); 
+	}
 }

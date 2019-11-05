@@ -15,4 +15,8 @@ public class Problema {
 		return codigo + " - " + descricao + " - " + viabilidade;
 	}
 
+	public String getDescricao() {
+		return this.descricao;
+	}
+
 }

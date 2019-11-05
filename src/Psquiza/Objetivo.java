@@ -71,5 +71,9 @@ public class Objetivo {
 	public String toString() {
 		return codigo + " - " + tipo + " - " + descricao + " - " + (aderencia+viabilidade);
 	}
+
+	public String getDescricao() {
+		return this.descricao;
+	}
 	
 }

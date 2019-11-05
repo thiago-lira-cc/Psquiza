@@ -59,4 +59,8 @@ public class ControllerProblema {
 		
 	}
 
+	public Map<String, Problema> getProblemas() {
+		return this.problemas;
+	}
+
 }

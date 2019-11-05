@@ -129,4 +129,8 @@ public class ControllerPesquisa {
 		}
 		throw new IllegalArgumentException("Pesquisa nao encontrada.");
 	}
+
+	public Map<String, Pesquisa> getPesquisas() {
+		return this.pesquisas;
+	}
 }

@@ -65,6 +65,11 @@ public class ControllerAtividade {
 	}
 
 
+	public Map<String, Atividade> getAtividades() {
+		return this.atividades;
+	}
+
+
 	
 	
 	

@@ -112,5 +112,8 @@ public class ControllerObjetivo {
 
 
 	}
+	public Map<String, Objetivo> getObjetivos() {
+		return this.objetivos;
+	}
 
 }

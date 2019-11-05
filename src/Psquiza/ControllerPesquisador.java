@@ -155,5 +155,8 @@ public class ControllerPesquisador {
 		}
 		throw new IllegalArgumentException("Pesquisador nao encontrado");
 	}
+	public Map<String, Pesquisador> getPesquisadores() {
+		return this.pesquisadores;
+	}
 
 }

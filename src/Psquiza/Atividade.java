@@ -83,6 +83,14 @@ public class Atividade {
 	public String toString() {
 		return this.descricao + " (" + this.nivelRisco + " - " + this.descricaoRisco + ")";
 	}
+
+	public String getDescricao() {
+		return this.descricao;
+	}
+
+	public String getDescricaoRisco() {
+		return this.descricaoRisco;
+	}
 	
 	
 
