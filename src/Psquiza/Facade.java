@@ -103,8 +103,9 @@ public class Facade {
 		controleAtividade.cadastraItem(codigo, item);
 	}
 	
-	public void exibeAtividade(String codigo) {
-		controleAtividade.exibeAtividade(codigo);
+	public String exibeAtividade(String codigo) {
+		return controleAtividade.exibeAtividade(codigo);
 	}
+	
 	
 }

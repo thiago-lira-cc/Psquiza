@@ -45,15 +45,22 @@ public class ControllerAtividade {
 
 	public void cadastraItem(String codigo, String item) {
 		excecoes.verificaString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		excecoes.verificaString(item, "Item nao pode ser nulo ou vazio.");
 		if (atividades.containsKey(codigo)) {
-			
+			atividades.get(codigo).cadastraItem(item);
+		} else {
+			throw new IllegalArgumentException("Atividade nao encontrada");
 		}
 		
 	}
 	
-	public void exibeAtividade(String codigo) {
+	public String exibeAtividade(String codigo) {
 		excecoes.verificaString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
-		
+		if (atividades.containsKey(codigo)) {
+			 return atividades.get(codigo).exibeAtividade();
+		} else {
+			throw new IllegalArgumentException("Atividade nao encontrada");
+		}
 		
 	}
 
