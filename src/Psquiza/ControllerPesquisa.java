@@ -154,4 +154,68 @@ public class ControllerPesquisa implements Services{
 		Collections.sort(resultados);
 		return resultados;
 	}
+	
+	public boolean associaProblema(String idPesquisa, String idProblema, ControllerProblema controleProblema) {
+		excecoes.verificaString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		excecoes.verificaString(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
+		if (pesquisas.containsKey(idPesquisa)) {
+			if (controleProblema.problemaJaCadastrado(idProblema)) {
+				Pesquisa pesq = pesquisas.get(idPesquisa);
+				Problema prob = controleProblema.pegaProblema(idProblema);
+				return pesq.associaProblema(prob);
+			} else {
+				throw new IllegalArgumentException("");
+			}
+		} else {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+	}
+	
+	public boolean desassociaProblema(String idPesquisa, String idProblema, ControllerProblema controleProblema) {
+		excecoes.verificaString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		excecoes.verificaString(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
+		if (pesquisas.containsKey(idPesquisa)) {
+			if (controleProblema.problemaJaCadastrado(idProblema)) {
+				Pesquisa pesq = pesquisas.get(idPesquisa);
+				Problema prob = controleProblema.pegaProblema(idProblema);
+				return pesq.desassociaProblema(prob);
+			} else {
+				throw new IllegalArgumentException("");
+			}
+		} else {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+	}
+
+	public boolean associaObjetivo(String idPesquisa, String idObjetivo, ControllerObjetivo controleObjetivo) {
+		excecoes.verificaString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		excecoes.verificaString(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
+		if (pesquisas.containsKey(idPesquisa)) {
+			if (controleObjetivo.objetivoJaCadastrado(idObjetivo)) {
+				Pesquisa p = pesquisas.get(idPesquisa);
+				Objetivo o = controleObjetivo.pegaObjetivo(idObjetivo);
+				return p.associaObjetivo(o);
+			} else {
+				throw new IllegalArgumentException("");
+			}
+		} else {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+	}
+
+	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo, ControllerObjetivo controleObjetivo) {
+		excecoes.verificaString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		excecoes.verificaString(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
+		if (pesquisas.containsKey(idPesquisa)) {
+			if (controleObjetivo.objetivoJaCadastrado(idObjetivo)) {
+				Pesquisa p = pesquisas.get(idPesquisa);
+				Objetivo o = controleObjetivo.pegaObjetivo(idObjetivo);
+				return p.desassociaObjetivo(o);
+			} else {
+				throw new IllegalArgumentException("");
+			}
+		} else {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+	}
 }

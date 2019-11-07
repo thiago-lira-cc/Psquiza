@@ -86,6 +86,22 @@ public class Facade {
 		controlePsquiza.apagarObjetivo(codigo);
 	}
 	
+	public boolean associaProblema(String idPesquisa, String idProblema) {
+		return controlePsquiza.associaProblema(idPesquisa, idProblema);
+	}
+	
+	public boolean desassociaProblema(String idPesquisa, String idProblema) {
+		return controlePsquiza.desassociaProblema(idPesquisa, idProblema);
+	}
+	
+	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
+		return controlePsquiza.associaObjetivo(idPesquisa, idObjetivo);
+	}
+	
+	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
+		return controlePsquiza.desassociaObjetivo(idPesquisa, idObjetivo);
+	}
+	
 	public void cadastraAtividade(String descricao, String nivelRisco,String descricaoRisco) {
 		controlePsquiza.cadastraAtividade(descricao, nivelRisco, descricaoRisco);
 	}

@@ -93,6 +93,22 @@ public class ControllerPsquiza {
 		controleObjetivo.apagarObjetivo(codigo);
 	}
 	
+	public boolean associaProblema(String idPesquisa, String idProblema) {
+		return controlePesquisa.associaProblema(idPesquisa, idProblema, controleProblema);
+	}
+	
+	public boolean desassociaProblema(String idPesquisa, String idProblema) {
+		return controlePesquisa.desassociaProblema(idPesquisa, idProblema, controleProblema);
+	}
+	
+	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {
+		return controlePesquisa.associaObjetivo(idPesquisa, idObjetivo, controleObjetivo);
+	}
+	
+	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo) {
+		return controlePesquisa.desassociaObjetivo(idPesquisa, idObjetivo, controleObjetivo);
+	}
+	
 	public void cadastraAtividade(String descricao, String nivelRisco,String descricaoRisco) {
 		controleAtividade.cadastraAtividade(descricao, nivelRisco, descricaoRisco);
 	}
