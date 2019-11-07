@@ -11,7 +11,7 @@ import java.util.Map;
  *
  */
 
-public class ControllerObjetivo {
+public class ControllerObjetivo implements Services{
 	/**
 	 * Mapa de objetivos identificados pelo codigo
 	 */
@@ -115,10 +115,14 @@ public class ControllerObjetivo {
 
 
 	}
-	public Map<String, Objetivo> getObjetivos() {
-		return this.objetivos;
-	}
-	public List<Busca> buscaObjetivo(String termo) {
+
+	/**
+	 * Metodo que verifica se entre os objetivos cadastrados existe o termo 
+	 * @param termo
+	 * @return List com os resultados
+	 */
+	@Override
+	public List<Busca> busca(String termo) {
 		List<Busca> resultados = new ArrayList<Busca>();
 		for (Objetivo objetivo : objetivos.values()) {
 			if (objetivo.getDescricao().toLowerCase().contains(termo.toLowerCase())) {

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ControllerPesquisa {
+public class ControllerPesquisa implements Services{
 
 	private Excecoes excecoes = new Excecoes();
 	/**
@@ -133,11 +133,13 @@ public class ControllerPesquisa {
 		throw new IllegalArgumentException("Pesquisa nao encontrada.");
 	}
 
-	public Map<String, Pesquisa> getPesquisas() {
-		return this.pesquisas;
-	}
-	
-	public List<Busca> buscaPesquisa(String termo){
+	/**
+	 * Metodo que verifica se entre as pesquisas cadastradas existe o termo 
+	 * @param termo
+	 * @return List com os resultados
+	 */
+	@Override
+	public List<Busca> busca(String termo) {
 		List<Busca> resultados = new ArrayList<Busca>();
 		for (Pesquisa pesquisa : pesquisas.values()) {
 			if (pesquisa.getDescricao().toLowerCase().contains(termo.toLowerCase())) {

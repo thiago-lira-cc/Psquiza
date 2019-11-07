@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ControllerProblema {
+public class ControllerProblema implements Services{
 	private Map<String, Problema> problemas;
 	private Excecoes excecoes;
 	private int contCodigo;
@@ -62,11 +62,13 @@ public class ControllerProblema {
 		
 	}
 
-	public Map<String, Problema> getProblemas() {
-		return this.problemas;
-	}
-
-	public List<Busca> buscaProblema(String termo) {
+	/**
+	 * Metodo que verifica se entre os problemas cadastrados existe o termo 
+	 * @param termo
+	 * @return List com os resultados
+	 */
+	@Override
+	public List<Busca> busca(String termo) {
 		List<Busca> resultados = new ArrayList<Busca>();
 		for (Problema problema : problemas.values()) {
 			if (problema.getDescricao().toLowerCase().contains(termo.toLowerCase())) {

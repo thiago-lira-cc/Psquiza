@@ -1,5 +1,7 @@
 package Psquiza;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ControllerPsquiza {
@@ -106,55 +108,82 @@ public class ControllerPsquiza {
 	public String exibeAtividade(String codigo) {
 		return controleAtividade.exibeAtividade(codigo);
 	}
-	
+	/**
+	 * Metodo que q busca um termo por todo o sistema
+	 * @param termo
+	 * @return String do codigo e do campo em que o termo foi achado em uma ordem especifica
+	 */
 	public String busca(String termo) {
 		excecoes.verificaString(termo, "Campo termo nao pode ser nulo ou vazio.");
 		
 		String strFinal = "";
-		/*
-		 * Pesquisa
-		 */
-		List<Busca> listaDePesquisas = controlePesquisa.buscaPesquisa(termo);
 		
-		for (int i = listaDePesquisas.size()-1; i >=0; i--) {
-			strFinal += listaDePesquisas.get(i).toString()+ " | ";
-		}
-		/*
-		 * Pesquisador
-		 */
-		List<Busca> listaDePesquisadores = controlePesquisador.buscaPesquisador(termo);
-		
-		for (int i = listaDePesquisadores.size()-1; i >=0; i--) {
-			strFinal += listaDePesquisadores.get(i).toString()+ " | ";
-		}
-		/*
-		 * Problema
-		 */
-		List<Busca> listaDeProblemas = controleProblema.buscaProblema(termo);
-		
-		for (int i = listaDeProblemas.size()-1; i >=0; i--) {
-			strFinal += listaDeProblemas.get(i).toString()+ " | ";
-		}
-		/*
-		 * Objetivo
-		 */
-		
-		List<Busca> listaDeObjetivos = controleObjetivo.buscaObjetivo(termo);
-		
-		for (int i = listaDeObjetivos.size()-1; i >=0; i--) {
-			strFinal += listaDeObjetivos.get(i).toString()+ " | ";
-		}
-		/*
-		 * Atividade
-		 */
-		
-		List<Busca> listaDeAtividade = controleAtividade.buscaAtividade(termo);
-		
-		for (int i = listaDeAtividade.size()-1; i >=0; i--) {
-			strFinal += listaDeAtividade.get(i).toString()+ " | ";
+		List<Busca> resultados = Pesquisa(termo);
+		for (Busca busca : resultados) {
+			strFinal += busca.toString();
 		}
 		
 		strFinal = strFinal.substring(0, strFinal.length()-3);
 		return strFinal;
+	}
+	/**
+	 * Metodo que busca um termo especifico no sistema e retorna o resultado na posicao passada como parametro
+	 * @param termo
+	 * @param numeroDoResultado
+	 * @return String do codigo e campo do resultado desejado
+	 */
+	public String busca(String termo, int numeroDoResultado) {
+		excecoes.verificaString(termo, "Campo termo nao pode ser nulo ou vazio.");
+		excecoes.verificaNumeroDoResultado(numeroDoResultado, "Numero do resultado nao pode ser negativo");
+		List<Busca> resultados = Pesquisa(termo);
+		
+		if (resultados.size()==0||numeroDoResultado>resultados.size()) {
+			throw new IllegalArgumentException("Entidade nao encontrada.");
+		}
+		
+		return resultados.get(numeroDoResultado-1).toString().substring(0, resultados.get(numeroDoResultado-1).toString().length()-3);
+	}
+	/**
+	 * Metodo que mostra quantos resultados foram achados
+	 * @param termo
+	 * @return int do numero de rsultados
+	 */
+	public int contaResultadosBusca(String termo) {
+		excecoes.verificaString(termo, "Campo termo nao pode ser nulo ou vazio.");
+		List<Busca> resultados = Pesquisa(termo);
+		if (resultados.size()==0) {
+			throw new IllegalArgumentException("Nenhum resultado encontrado");
+		}
+		return resultados.size();
+	}
+	/**
+	 * Metodo que é usado pelos outros metodos para fazer a busca
+	 * @param termo
+	 * @return List dos resultados achados
+	 */
+	private List<Busca> Pesquisa(String termo){
+		List<Busca> resultados = new ArrayList<Busca>();
+		
+		List<Busca> listaDePesquisas = controlePesquisa.busca(termo);
+		Collections.reverse(listaDePesquisas);
+		resultados.addAll(listaDePesquisas);
+		
+		List<Busca> listaDePesquisadores = controlePesquisador.busca(termo);
+		Collections.reverse(listaDePesquisadores);
+		resultados.addAll(listaDePesquisadores);
+		
+		List<Busca> listaDeProblemas = controleProblema.busca(termo);
+		Collections.reverse(listaDeProblemas);
+		resultados.addAll(listaDeProblemas);
+		
+		List<Busca> listaDeObjetivos = controleObjetivo.busca(termo);
+		Collections.reverse(listaDeObjetivos);
+		resultados.addAll(listaDeObjetivos);
+		
+		List<Busca> listaDeAtividade = controleAtividade.busca(termo);
+		Collections.reverse(listaDeAtividade);
+		resultados.addAll(listaDeAtividade);
+		
+		return resultados;
 	}
 }

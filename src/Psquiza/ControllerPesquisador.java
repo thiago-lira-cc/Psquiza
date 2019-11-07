@@ -10,7 +10,7 @@ import java.util.Map;
  * @author Thiago Lira
  *
  */
-public class ControllerPesquisador {
+public class ControllerPesquisador implements Services{
 	/**
 	 * Instancia a classe de excessoes
 	 */
@@ -158,10 +158,14 @@ public class ControllerPesquisador {
 		}
 		throw new IllegalArgumentException("Pesquisador nao encontrado");
 	}
-	public Map<String, Pesquisador> getPesquisadores() {
-		return this.pesquisadores;
-	}
-	public List<Busca> buscaPesquisador(String termo) {
+
+	/**
+	 * Metodo que verifica se entre os pesquisadores cadastrados existe o termo 
+	 * @param termo
+	 * @return List com os resultados
+	 */
+	@Override
+	public List<Busca> busca(String termo) {
 		List<Busca> resultados = new ArrayList<Busca>();
 		for (Pesquisador pesquisador : pesquisadores.values()) {
 			if (pesquisador.getBiografia().toLowerCase().contains(termo.toLowerCase())) {

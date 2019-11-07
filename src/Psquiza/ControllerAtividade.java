@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ControllerAtividade {
+public class ControllerAtividade implements Services{
 	private Map <String, Atividade> atividades;
 	private Excecoes excecoes;
 	private int contCodigo;
@@ -66,14 +66,14 @@ public class ControllerAtividade {
 		}
 		
 	}
-
-
-	public Map<String, Atividade> getAtividades() {
-		return this.atividades;
-	}
-
-
-	public List<Busca> buscaAtividade(String termo) {
+	
+	/**
+	 * Metodo que verifica se entre as atividades cadastradas existe o termo 
+	 * @param termo
+	 * @return List com os resultados
+	 */
+	@Override
+	public List<Busca> busca(String termo) {
 		List<Busca> resultados = new ArrayList<Busca>();
 		for (Atividade atividade : atividades.values()) {
 			if (atividade.getDescricao().toLowerCase().contains(termo.toLowerCase())) {

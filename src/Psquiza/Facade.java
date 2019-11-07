@@ -105,4 +105,12 @@ public class Facade {
 	public String busca(String termo) {
 		return controlePsquiza.busca(termo); 
 	}
+	
+	public String busca(String termo, int numeroDoResultado) {
+		return controlePsquiza.busca(termo, numeroDoResultado); 
+	}
+	
+	public int contaResultadosBusca(String termo) {
+		return controlePsquiza.contaResultadosBusca(termo);
+	}
 }
