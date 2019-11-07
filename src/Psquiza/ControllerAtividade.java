@@ -88,5 +88,24 @@ public class ControllerAtividade implements Services{
 		Collections.sort(resultados);
 		return resultados;
 	}
+	
+	public int contaItensPendentes(String codigo) {
+		excecoes.verificaString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		if(atividades.containsKey(codigo)) {
+			 return atividades.get(codigo).contaItensPendentes();
+		} else {
+			throw new IllegalArgumentException("Atividade nao encontrada");
+		}
+	}
+
+
+	public int contaItensRealizados(String codigo) {
+		excecoes.verificaString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
+		if(atividades.containsKey(codigo)) {
+			 return atividades.get(codigo).contaItensRealizados();
+		} else {
+			throw new IllegalArgumentException("Atividade nao encontrada");
+		}
+	}
 
 }

@@ -96,6 +96,27 @@ public class Atividade {
 		return codigo;
 	}
 	
+	public int contaItensPendentes() {
+		int cont = 0;
+		for (Item item : itens.values()) {
+			if (item.getStatus().equals("PENDENTE")) {
+				cont++;
+			}
+		}
+		return cont;
+		
+	}
+
+	public int contaItensRealizados() {
+		int cont = 0;
+		for (Item item : itens.values()) {
+			if (item.getStatus().equals("REALIZADO")) {
+				cont++;
+			}
+		}
+		return cont;
+	}
+	
 	
 
 }

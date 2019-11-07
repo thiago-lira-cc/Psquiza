@@ -108,6 +108,15 @@ public class ControllerPsquiza {
 	public String exibeAtividade(String codigo) {
 		return controleAtividade.exibeAtividade(codigo);
 	}
+	
+	public int contaItensPendentes(String codigo) {
+		return controleAtividade.contaItensPendentes(codigo);
+	}
+	
+	public int contaItensRealizados(String codigo) {
+		return controleAtividade.contaItensRealizados(codigo);
+	}
+
 	/**
 	 * Metodo que q busca um termo por todo o sistema
 	 * @param termo

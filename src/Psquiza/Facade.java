@@ -113,4 +113,11 @@ public class Facade {
 	public int contaResultadosBusca(String termo) {
 		return controlePsquiza.contaResultadosBusca(termo);
 	}
+	
+	public int contaItensPendentes(String codigo) {
+		return controlePsquiza.contaItensPendentes(codigo);
+	}
+	public int contaItensRealizados(String codigo) {
+		return controlePsquiza.contaItensRealizados(codigo);
+	}
 }
