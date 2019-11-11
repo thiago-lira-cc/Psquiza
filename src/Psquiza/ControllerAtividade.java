@@ -24,7 +24,7 @@ public class ControllerAtividade implements Services{
 	}
 
 
-	public void cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
+	public String cadastraAtividade(String descricao, String nivelRisco, String descricaoRisco) {
 		excecoes.verificaString(descricao, "Campo Descricao nao pode ser nulo ou vazio.");
 		excecoes.verificaString(nivelRisco, "Campo nivelRisco nao pode ser nulo ou vazio.");
 		excecoes.verificaString(descricaoRisco, "Campo descricaoRisco nao pode ser nulo ou vazio.");
@@ -33,6 +33,7 @@ public class ControllerAtividade implements Services{
 		if (!atividades.containsKey(codigo)) {
 			Atividade atividade = new Atividade (descricao, nivelRisco, descricaoRisco,codigo);
 			atividades.put(codigo, atividade);
+			
 		}
 	}
 
