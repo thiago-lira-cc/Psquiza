@@ -154,7 +154,15 @@ public class ControllerPesquisa implements Services{
 		Collections.sort(resultados);
 		return resultados;
 	}
-	
+	/**
+	 * Associa um problema a uma pesquisa, passando os
+	 * respectivos ids e o controller de problema para
+	 * ter acesso a um determinado problema.
+	 * @param idPesquisa
+	 * @param idProblema
+	 * @param controleProblema
+	 * @return se a associacao foi bem sucedida
+	 */
 	public boolean associaProblema(String idPesquisa, String idProblema, ControllerProblema controleProblema) {
 		excecoes.verificaString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		excecoes.verificaString(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
@@ -170,50 +178,60 @@ public class ControllerPesquisa implements Services{
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}
 	}
-	
-	public boolean desassociaProblema(String idPesquisa, String idProblema, ControllerProblema controleProblema) {
+	/**
+	 * Desassocia um problema em uma pesquisa a partir
+	 * do id de pesquisa e do controller de Problema.
+	 * @param idPesquisa
+	 * @param controleProblema
+	 * @return se a desassociacao foi bem sucedida.
+	 */
+	public boolean desassociaProblema(String idPesquisa, ControllerProblema controleProblema) {
 		excecoes.verificaString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
-		excecoes.verificaString(idProblema, "Campo idProblema nao pode ser nulo ou vazio.");
 		if (pesquisas.containsKey(idPesquisa)) {
-			if (controleProblema.problemaJaCadastrado(idProblema)) {
-				Pesquisa pesq = pesquisas.get(idPesquisa);
-				Problema prob = controleProblema.pegaProblema(idProblema);
-				return pesq.desassociaProblema(prob);
-			} else {
-				throw new IllegalArgumentException("");
-			}
+			Pesquisa pesq = pesquisas.get(idPesquisa);
+			return pesq.desassociaProblema();
 		} else {
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}
 	}
-
+	
+	/**
+	 * Associa um objetivo a uma pesquisa a partir dos seus
+	 * respectivos ids e do controller de objetivo, utilizado para
+	 * acessar o objetivo em questao
+	 * @param idPesquisa
+	 * @param idObjetivo
+	 * @param controleObjetivo
+	 * @return se a associacao foi bem sucedida
+	 */
 	public boolean associaObjetivo(String idPesquisa, String idObjetivo, ControllerObjetivo controleObjetivo) {
 		excecoes.verificaString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		excecoes.verificaString(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
 		if (pesquisas.containsKey(idPesquisa)) {
-			if (controleObjetivo.objetivoJaCadastrado(idObjetivo)) {
-				Pesquisa p = pesquisas.get(idPesquisa);
-				Objetivo o = controleObjetivo.pegaObjetivo(idObjetivo);
-				return p.associaObjetivo(o);
-			} else {
-				throw new IllegalArgumentException("");
-			}
+			Pesquisa p = pesquisas.get(idPesquisa);
+			Objetivo o = controleObjetivo.pegaObjetivo(idObjetivo);
+			return p.associaObjetivo(idObjetivo, o);
 		} else {
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}
 	}
-
+	
+	/**
+	 * Desassocia um objetivo a uma pesquisa a partir dos seus
+	 * respectivos ids e do controller de objetivo, utilizado para
+	 * acessar o objetivo em questao
+	 * @param idPesquisa
+	 * @param idObjetivo
+	 * @param controleObjetivo
+	 * @return
+	 */
 	public boolean desassociaObjetivo(String idPesquisa, String idObjetivo, ControllerObjetivo controleObjetivo) {
 		excecoes.verificaString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		excecoes.verificaString(idObjetivo, "Campo idObjetivo nao pode ser nulo ou vazio.");
 		if (pesquisas.containsKey(idPesquisa)) {
-			if (controleObjetivo.objetivoJaCadastrado(idObjetivo)) {
-				Pesquisa p = pesquisas.get(idPesquisa);
-				Objetivo o = controleObjetivo.pegaObjetivo(idObjetivo);
-				return p.desassociaObjetivo(o);
-			} else {
-				throw new IllegalArgumentException("");
-			}
+			Pesquisa p = pesquisas.get(idPesquisa);
+			Objetivo o = controleObjetivo.pegaObjetivo(idObjetivo);
+			return p.desassociaObjetivo(o);
 		} else {
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}

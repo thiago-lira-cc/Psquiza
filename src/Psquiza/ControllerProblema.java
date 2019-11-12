@@ -36,12 +36,8 @@ public class ControllerProblema implements Services{
 		
 		String codigo = geraCodigo();
 		Problema p = new Problema(codigo, descricao, viabilidade);
-		if (problemaJaCadastrado(codigo)==false) {
-			this.problemas.put(codigo, p);
-			return codigo;
-		} else {
-			throw new IllegalArgumentException("Problema ja existe");
-		}
+		this.problemas.put(codigo, p);
+		return codigo;
 	}
 
 	public String exibeProblema(String codigo) {

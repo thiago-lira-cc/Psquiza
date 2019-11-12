@@ -76,13 +76,10 @@ public class ControllerObjetivo implements Services{
 		excecoes.verificaValor(viabilidade, "Valor invalido de viabilidade.");
 		String codigo = geraCodigo();
 
-		if (objetivoJaCadastrado(codigo)==false) {
-			Objetivo o = new Objetivo(codigo, tipo, descricao, aderencia, viabilidade);
-			objetivos.put(codigo, o);
-			return codigo;
-		} else {
-			throw new IllegalArgumentException("Objetivo ja existe");
-		}
+		
+		Objetivo o = new Objetivo(codigo, tipo, descricao, aderencia, viabilidade);
+		objetivos.put(codigo, o);
+		return codigo;
 	}
 
 	/**

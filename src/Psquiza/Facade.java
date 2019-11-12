@@ -90,8 +90,8 @@ public class Facade {
 		return controlePsquiza.associaProblema(idPesquisa, idProblema);
 	}
 	
-	public boolean desassociaProblema(String idPesquisa, String idProblema) {
-		return controlePsquiza.desassociaProblema(idPesquisa, idProblema);
+	public boolean desassociaProblema(String idPesquisa) {
+		return controlePsquiza.desassociaProblema(idPesquisa);
 	}
 	
 	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {

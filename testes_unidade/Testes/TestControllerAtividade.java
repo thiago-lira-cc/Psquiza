@@ -80,6 +80,13 @@ class TestControllerAtividade {
 	
 	@Test
 	public void testApagaAtividade() {
+		try {
+			controleAtividade.apagaAtividade("A2");
+			controleAtividade.exibeAtividade("A2");
+			assertFalse(false);
+		} catch (IllegalArgumentException m) {
+			
+		}
 		/**
 		 * Teste com codigo vazio
 		 */
@@ -111,6 +118,9 @@ class TestControllerAtividade {
 	
 	@Test
 	public void testCadastraItem() {
+			String atividade = controleAtividade.exibeAtividade("A3");
+			controleAtividade.cadastraItem("A3", "I2");
+			assertEquals(true, controleAtividade.exibeAtividade("A3").equals(atividade));
 		/**
 		 * Teste com codigo vazio
 		 */

@@ -26,7 +26,7 @@ public class Objetivo {
 	 * Indica se um objetivo ja esta associado
 	 * a uma pesquisa
 	 */
-	private boolean isAssociado;
+	private boolean associado;
 	/**
 	 * Constroi um objetivo no sistema
 	 * @param codigo
@@ -41,15 +41,15 @@ public class Objetivo {
 		this.descricao = descricao;
 		this.aderencia = aderencia;
 		this.viabilidade = viabilidade;
-		this.isAssociado = false;
+		this.associado = false;
 	}
 	
 	public boolean isAssociado() {
-		return isAssociado;
+		return associado;
 	}
 
-	public void setAssociado(boolean isAssociado) {
-		this.isAssociado = isAssociado;
+	public void setAssociado(boolean associado) {
+		this.associado = associado;
 	}
 
 	@Override

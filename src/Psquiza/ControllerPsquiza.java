@@ -97,8 +97,8 @@ public class ControllerPsquiza {
 		return controlePesquisa.associaProblema(idPesquisa, idProblema, controleProblema);
 	}
 	
-	public boolean desassociaProblema(String idPesquisa, String idProblema) {
-		return controlePesquisa.desassociaProblema(idPesquisa, idProblema, controleProblema);
+	public boolean desassociaProblema(String idPesquisa) {
+		return controlePesquisa.desassociaProblema(idPesquisa, controleProblema);
 	}
 	
 	public boolean associaObjetivo(String idPesquisa, String idObjetivo) {

@@ -1,5 +1,6 @@
 package Psquiza;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -34,6 +35,10 @@ public class Pesquisa{
 	 * Objetivos associados a pesquisa
 	 */
 	private Map<String, Objetivo> objetivos;
+	/**
+	 * verifica se uma pesquisa ja esta associada
+	 * a um problema
+	 */
 	private boolean isAssociada;
 	
 	/**
@@ -48,6 +53,7 @@ public class Pesquisa{
 		this.ativado = true;
 		this.codigo = codigo;
 		this.isAssociada = false;
+		this.objetivos = new HashMap<>();
 	}
 	
 	public boolean isAssociada() {
@@ -81,45 +87,71 @@ public class Pesquisa{
 	public void setAtivado(boolean ativado) {
 		this.ativado = ativado;
 	}
-	
+	/**
+	 * Associa um problema a uma pesquisa. Cada pesquisa
+	 * so pode estar associada a um unico problema
+	 * @param p problema
+	 * @return se a associacao foi bem sucedida
+	 */
 	public boolean associaProblema(Problema p) {
 		if (isAtivado()==false) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
-		}
-		if (isAssociada()==true) {
+		} else if (this.problema==p) {
+			return false;
+		} else if (isAssociada()==true) {
 			throw new IllegalArgumentException("Pesquisa ja associada a um problema.");
 		}
 		this.problema = p;
 		setAssociada(true);
 		return true;
 	}
-	
-	public boolean desassociaProblema(Problema prob) {
+	/**
+	 * desassocia umm problema de uma pesquisa
+	 * @return se a desassociacao foi bem sucedida
+	 */
+	public boolean desassociaProblema() {
 		if (isAtivado()==false) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
+		} else if (isAssociada()==false) {
+			return false;
 		}
 		this.problema = null;
 		setAssociada(false);
 		return true;
 	}
-
-	public boolean associaObjetivo(Objetivo o) {
+	/**
+	 * associa um objetivo a uma pesquisa. Cada objetivo so
+	 * pode estar associado a uma pesquisa, no entanto, uma pesquisa
+	 * pode estar associada a varios objetivos
+	 * @param idObjetivo
+	 * @param o objetivo
+	 * @return se a associacao foi bem sucedida
+	 */
+	public boolean associaObjetivo(String idObjetivo, Objetivo o) {
 		if (isAtivado()==false) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
-		}
-		if (o.isAssociado()==true) {
+		} else if (objetivos.containsKey(idObjetivo)) {
+			return false;
+		} else if (o.isAssociado()==true) {
 			throw new IllegalArgumentException("Objetivo ja associado a uma pesquisa.");
 		}
 		o.setAssociado(true);
-		objetivos.put(o.getCodigo(), o);
+		objetivos.put(idObjetivo, o);
 		return true;
 			
 	}
-
+	/**
+	 * desassocia um objetivo de uma pesquisa
+	 * @param o objetivo
+	 * @return se a desassociacao foi bem sucedida
+	 */
 	public boolean desassociaObjetivo(Objetivo o) {
 		if (isAtivado()==false) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
+		} else if (!objetivos.containsKey(o.getCodigo())) {
+			return false;
 		}
+		o.setAssociado(false);
 		objetivos.remove(o.getCodigo());
 		return true;
 	}
