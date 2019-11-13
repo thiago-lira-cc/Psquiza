@@ -35,6 +35,7 @@ public class ControllerAtividade implements Services{
 			atividades.put(codigo, atividade);
 			
 		}
+		return codigo;
 	}
 
 
@@ -76,20 +77,40 @@ public class ControllerAtividade implements Services{
 	@Override
 	public List<Busca> busca(String termo) {
 		List<Busca> resultados = new ArrayList<Busca>();
-		for (Atividade atividade : atividades.values()) {
-			if (atividade.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
+		List<Atividade> atividades = getAtividades();
+		Collections.sort(atividades);
+		for (Atividade atividade : atividades) {
+			if (atividade.getDescricao().toLowerCase().contains(termo.toLowerCase())
+				&& atividade.getDescricaoRisco().toLowerCase().contains(termo.toLowerCase())) {
+				
+				Busca busca1 = new Busca(atividade.getCodigo(), atividade.getDescricaoRisco());
+				resultados.add(busca1);
+				
+				Busca busca2 = new Busca(atividade.getCodigo(), atividade.getDescricao());
+				resultados.add(busca2);
+				
+			}else if(atividade.getDescricao().toLowerCase().contains(termo.toLowerCase())){
 				Busca busca = new Busca(atividade.getCodigo(), atividade.getDescricao());
 				resultados.add(busca);
-			}
-			if (atividade.getDescricaoRisco().toLowerCase().contains(termo.toLowerCase())) {
+			}else if (atividade.getDescricaoRisco().toLowerCase().contains(termo.toLowerCase())) {
 				Busca busca = new Busca(atividade.getCodigo(), atividade.getDescricaoRisco());
 				resultados.add(busca);
 			}
+
 		}
-		Collections.sort(resultados);
+
 		return resultados;
 	}
 	
+	private List<Atividade> getAtividades() {
+		List<Atividade> atividades = new ArrayList<Atividade>();
+		for (Atividade atividade : this.atividades.values()) {
+			atividades.add(atividade);
+		}
+		return atividades;
+	}
+
+
 	public int contaItensPendentes(String codigo) {
 		excecoes.verificaString(codigo, "Campo codigo nao pode ser nulo ou vazio.");
 		if(atividades.containsKey(codigo)) {

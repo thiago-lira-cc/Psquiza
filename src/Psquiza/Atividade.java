@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class Atividade {
+public class Atividade implements Comparable<Atividade>{
 	private String descricao;
 	private String nivelRisco;
 	private String descricaoRisco;
@@ -115,6 +115,11 @@ public class Atividade {
 			}
 		}
 		return cont;
+	}
+
+	@Override
+	public int compareTo(Atividade o) {
+		return this.codigo.compareTo(o.getCodigo());
 	}
 	
 	
