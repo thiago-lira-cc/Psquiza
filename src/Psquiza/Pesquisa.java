@@ -10,7 +10,7 @@ import java.util.Map;
  * @author Iele Passos
  *
  */
-public class Pesquisa{
+public class Pesquisa implements Comparable<Pesquisa>{
 	/**
 	 * A descricao da pesquisa.
 	 */
@@ -167,6 +167,12 @@ public class Pesquisa{
 
 	public String getCodigo() {
 		return this.codigo;
+	}
+
+	@Override
+	public int compareTo(Pesquisa o) {
+		// TODO Auto-generated method stub
+		return this.codigo.compareTo(o.getCodigo());
 	}
 
 }

@@ -147,7 +147,9 @@ public class ControllerPsquiza {
 		for (Busca busca : resultados) {
 			strFinal += busca.toString();
 		}
-		
+		if (strFinal.length()==0) {
+			return "";
+		}
 		strFinal = strFinal.substring(0, strFinal.length()-3);
 		return strFinal;
 	}

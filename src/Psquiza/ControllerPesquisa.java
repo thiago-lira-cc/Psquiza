@@ -141,19 +141,42 @@ public class ControllerPesquisa implements Services{
 	@Override
 	public List<Busca> busca(String termo) {
 		List<Busca> resultados = new ArrayList<Busca>();
-		for (Pesquisa pesquisa : pesquisas.values()) {
-			if (pesquisa.getDescricao().toLowerCase().contains(termo.toLowerCase())) {
+		List<Pesquisa> pesquisas = getPesquisas();
+		Collections.sort(pesquisas);
+		for (Pesquisa pesquisa : pesquisas) {
+			if (pesquisa.getDescricao().toLowerCase().contains(termo.toLowerCase())
+				&& pesquisa.getCampoDeInteresse().toLowerCase().contains(termo.toLowerCase())) {
+				
+				Busca busca1 = new Busca(pesquisa.getCodigo(), pesquisa.getCampoDeInteresse());
+				resultados.add(busca1);
+				
+				Busca busca2 = new Busca(pesquisa.getCodigo(), pesquisa.getDescricao());
+				resultados.add(busca2);
+				
+			}else if(pesquisa.getDescricao().toLowerCase().contains(termo.toLowerCase())){
 				Busca busca = new Busca(pesquisa.getCodigo(), pesquisa.getDescricao());
 				resultados.add(busca);
-			}
-			if (pesquisa.getCampoDeInteresse().toLowerCase().contains(termo.toLowerCase())) {
+			}else if (pesquisa.getCampoDeInteresse().toLowerCase().contains(termo.toLowerCase())) {
 				Busca busca = new Busca(pesquisa.getCodigo(), pesquisa.getCampoDeInteresse());
 				resultados.add(busca);
 			}
+
 		}
-		Collections.sort(resultados);
+
 		return resultados;
 	}
+	/**
+	 * Metodo responsavel por retornar numa lista as pesquisas cadastradas
+	 * @return Lista de pesquisas
+	 */
+	private List<Pesquisa> getPesquisas() {
+		List<Pesquisa> pesquisas = new ArrayList<Pesquisa>();
+		for (Pesquisa pesquisa : this.pesquisas.values()) {
+			pesquisas.add(pesquisa);
+		}
+		return pesquisas;
+	}
+
 	/**
 	 * Associa um problema a uma pesquisa, passando os
 	 * respectivos ids e o controller de problema para
