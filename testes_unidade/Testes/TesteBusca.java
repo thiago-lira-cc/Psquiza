@@ -25,7 +25,8 @@ class TesteBusca {
 	public void testeBuscaTermo() {
 		assertEquals("TWI1: Um estudo sobre o uso do twitter para pronunciamentos presidencias. | A1: Monitoramento do uso do twitter por parte de figuras do governo.",controlePsquiza.busca("uso"));
 		assertEquals("sulley@2001: Interessado na importancia do pensamento critico na sociedade. | O1: Mostrar como um discurso pode validar determinados atos na sociedade.",controlePsquiza.busca("sociedade"));
-		//assertEquals(" ",controlePsquiza.busca("birolirolies"));
+		assertEquals("",controlePsquiza.busca("birolirolies"));
+		
 		//teste campo de termo nulo ou vazio
 		try{
 			controlePsquiza.busca(null);
@@ -43,7 +44,60 @@ class TesteBusca {
 	}
 	@Test
 	public void testeBuscaEspcifica() {
+		assertEquals("TWI1: Um estudo sobre o uso do twitter para pronunciamentos presidencias.",controlePsquiza.busca("twitter", 1));
+		//teste campo termo nulo ou vazio 
+		try {
+			controlePsquiza.busca(null, 1);
+		}
+		catch(IllegalArgumentException m) {
+			
+		}
 		
+		try {
+			controlePsquiza.busca("", 1);
+		}
+		catch(IllegalArgumentException m) {
+			
+		}
+		//resulado negativo
+		try {
+			controlePsquiza.busca("twiter", -2);
+		}
+		catch(IllegalArgumentException m) {
+			
+		}
+		//entidade nao encontrada
+		try {
+			controlePsquiza.busca("twitter", 50);
+		}
+		catch(IllegalArgumentException m) {
+			
+		}
+		
+	}
+	@Test
+	public void testeContaResult() {
+		assertEquals(3,controlePsquiza.contaResultadosBusca("twitter"));
+		//teste campo termo nulo ou vazio 
+		try {
+			controlePsquiza.contaResultadosBusca(null);
+		}
+		catch(IllegalArgumentException m) {
+			
+		}
+		try {
+			controlePsquiza.contaResultadosBusca(" ");
+		}
+		catch(IllegalArgumentException m) {
+			
+		}
+		//teste resultado nao encontrado
+		try {
+			controlePsquiza.contaResultadosBusca("xuxu");
+		}
+		catch(IllegalArgumentException m) {
+			
+		}
 	}
 }
 	
