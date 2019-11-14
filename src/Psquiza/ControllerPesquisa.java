@@ -259,4 +259,93 @@ public class ControllerPesquisa implements Services{
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}
 	}
+	/**
+	 * Gera uma String ordenada de pesquisas de acordo com estar
+	 * associadas a problemas ou nao
+	 * @param pesquisas
+	 * @return as pesquisas ordenadas
+	 */
+	public String listaPesquisasProblema(List<Pesquisa> pesquisas) {
+		List<Pesquisa> associadas = new ArrayList<Pesquisa>();
+		List<Pesquisa> naoAssociadas = new ArrayList<Pesquisa>();
+		String listaAssociadas = "";
+		String listaNaoAssociadas = "";
+		for (Pesquisa p : pesquisas) {
+			if (p.isAssociada()) {
+				associadas.add(p);
+			} else {
+				naoAssociadas.add(p);
+			}
+		}
+		for (Pesquisa a : associadas) {
+			if (listaAssociadas.isEmpty()) {
+				listaAssociadas += a.toString();
+			} else {
+				listaAssociadas += " | " + a.toString();
+			}
+		}
+		for (Pesquisa n : naoAssociadas) {
+			listaNaoAssociadas += " | " + n.toString();
+		}
+		return listaAssociadas + listaNaoAssociadas;
+	}
+	/**
+	 * Gera uma String ordenada de pesquisas a partir da
+	 * quantidade de objetivos	
+	 * @param pesquisas
+	 * @return as pesquisas ordenadas
+	 */
+	public String listaPesquisasObj(List<Pesquisa> pesquisas) {
+		List<Pesquisa> listaPesquisasO = pesquisas;
+
+		Collections.sort(listaPesquisasO, new ComparadorPesquisasQtdObjetivos());
+		Collections.reverse(listaPesquisasO);
+		String lista = "";
+		for (Pesquisa p : listaPesquisasO) {
+			if (lista.isEmpty()) {
+				lista += p.toString();
+			} else {
+				lista += " | " + p.toString();
+			}
+		}
+		return lista;
+	}
+	/**
+	 * Gera uma String ordenada de pesquisas a partir dos seus
+	 * respectivos IDs
+	 * @param pesquisas
+	 * @return as pesquisas ordenadas
+	 */
+	public String listaPesquisasPesquisa(List<Pesquisa> pesquisas) {
+		String lista = "";
+		for (Pesquisa p : pesquisas) {
+			if (lista.isEmpty()) {
+				lista += p.toString();
+			} else {
+				lista += " | " + p.toString();
+			}
+		}
+		return lista;
+	}
+	/**
+	 * Gera uma String ordenada de pesquisas de acordo com
+	 * a ordem passada como parametro
+	 * @param ordem
+	 * @return as pesquisas ordenadas
+	 */
+	public String listaPesquisas(String ordem) {
+		excecoes.verificaString(ordem, "Valor invalido da ordem");
+		List<Pesquisa> pesquisas = getPesquisas();
+		Collections.sort(pesquisas);
+		Collections.reverse(pesquisas);
+		if (ordem.equalsIgnoreCase("problema")) {
+			return listaPesquisasProblema(pesquisas);
+		} else if (ordem.equalsIgnoreCase("objetivos")) {
+			return listaPesquisasObj(pesquisas);
+		} else if (ordem.equalsIgnoreCase("pesquisa")) {
+			return listaPesquisasPesquisa(pesquisas);
+		} else {
+			throw new IllegalArgumentException("Valor invalido da ordem");
+		}
+	}
 }

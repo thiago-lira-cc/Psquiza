@@ -1,6 +1,6 @@
 package Psquiza;
 
-public class Objetivo {
+public class Objetivo implements Comparable<Objetivo>{
 
 	/**
 	 * o codigo identificador do objetivo
@@ -92,5 +92,9 @@ public class Objetivo {
 	
 	public String getCodigo() {
 		return this.codigo;
+	}
+	@Override
+	public int compareTo(Objetivo o) {
+		return this.codigo.compareTo(o.getCodigo());
 	}
 }

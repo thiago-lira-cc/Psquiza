@@ -1,6 +1,9 @@
 package Psquiza;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,6 +39,10 @@ public class Pesquisa implements Comparable<Pesquisa>{
 	 */
 	private Map<String, Objetivo> objetivos;
 	/**
+	 * Quantidade de objetivos de uma pesquisa
+	 */
+	private int qtdObjetivos;
+	/**
 	 * verifica se uma pesquisa ja esta associada
 	 * a um problema
 	 */
@@ -54,6 +61,7 @@ public class Pesquisa implements Comparable<Pesquisa>{
 		this.codigo = codigo;
 		this.isAssociada = false;
 		this.objetivos = new HashMap<>();
+		this.qtdObjetivos = 0;
 	}
 	
 	public boolean isAssociada() {
@@ -137,6 +145,7 @@ public class Pesquisa implements Comparable<Pesquisa>{
 		}
 		o.setAssociado(true);
 		objetivos.put(idObjetivo, o);
+		qtdObjetivos++;
 		return true;
 			
 	}
@@ -153,7 +162,25 @@ public class Pesquisa implements Comparable<Pesquisa>{
 		}
 		o.setAssociado(false);
 		objetivos.remove(o.getCodigo());
+		qtdObjetivos-=1;
 		return true;
+	}
+	/**
+	 * Gera uma lista de objetivos ordenada pelo maior ID
+	 * @return uma lista de objetivos ordenada
+	 */
+	public List<Objetivo> listaObjetivos() {
+		List<Objetivo> lista = new ArrayList<>();
+		for (Objetivo o : this.objetivos.values()) {
+			lista.add(o);
+		}
+		Collections.sort(lista);
+		Collections.reverse(lista);
+		return lista;
+	}
+	
+	public int getQtdObjetivos() {
+		return qtdObjetivos;
 	}
 	
 	/**
@@ -170,9 +197,8 @@ public class Pesquisa implements Comparable<Pesquisa>{
 	}
 
 	@Override
-	public int compareTo(Pesquisa o) {
-		// TODO Auto-generated method stub
-		return this.codigo.compareTo(o.getCodigo());
+	public int compareTo(Pesquisa p) {
+		return this.codigo.compareTo(p.getCodigo());
 	}
 
 }

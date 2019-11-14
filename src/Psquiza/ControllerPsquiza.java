@@ -213,4 +213,8 @@ public class ControllerPsquiza {
 		
 		return resultados;
 	}
+	
+	public String listaPesquisas(String ordem) {
+		return controlePesquisa.listaPesquisas(ordem);
+	}
 }

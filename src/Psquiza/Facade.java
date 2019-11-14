@@ -102,6 +102,10 @@ public class Facade {
 		return controlePsquiza.desassociaObjetivo(idPesquisa, idObjetivo);
 	}
 	
+	public String listaPesquisas(String ordem) {
+		return controlePsquiza.listaPesquisas(ordem);
+	}
+	
 	public void cadastraAtividade(String descricao, String nivelRisco,String descricaoRisco) {
 		controlePsquiza.cadastraAtividade(descricao, nivelRisco, descricaoRisco);
 	}
