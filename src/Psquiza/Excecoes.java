@@ -119,5 +119,11 @@ public class Excecoes {
 			throw new IllegalArgumentException(msg);
 		}
 	}
+	public void verificaItemDuracao(int num,String msg) {
+		if(num == 0 || num<0) {
+			throw new IllegalArgumentException(msg);
+			
+		}
+	}
 	
 }

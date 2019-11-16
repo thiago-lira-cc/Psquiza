@@ -217,4 +217,33 @@ public class ControllerPsquiza {
 	public String listaPesquisas(String ordem) {
 		return controlePesquisa.listaPesquisas(ordem);
 	}
+	
+	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade) {
+		return controlePesquisa.associaAtividade(codigoPesquisa, codigoAtividade, controleAtividade);
+		
+	}
+	public boolean desassociaAtividade(String codigoPesquisa, String codigoAtividade) {
+		return controlePesquisa.desassosciaAtividade(codigoPesquisa, codigoAtividade, controleAtividade);
+	}
+	public void  executaAtividade(String codigoAtividade,int item,int duracao) {
+		if(controlePesquisa.atividadeEhAssociada(codigoAtividade)==false) {
+			throw new IllegalArgumentException("Atividade sem associacoes com pesquisas.");
+		}
+		controleAtividade.executaAtividade(codigoAtividade,item,duracao);
+	}
+	public void cadastraResultado(String codigoAtividade, String resultado) {
+		controleAtividade.cadastraResultado(codigoAtividade, resultado);
+	}
+	public boolean removeResultado(String codigoAtividade,int numeroDoResultado) {
+		return controleAtividade.removeResultado(codigoAtividade, numeroDoResultado);
+	}
+	public String listaResultados(String codigoAtividade) {
+		return controleAtividade.listaResultados(codigoAtividade);
+	}
+
+	public int getDuracao(String codigoAtividade) {
+		return controleAtividade.getDuracao(codigoAtividade);
+		
+	}
 }
+

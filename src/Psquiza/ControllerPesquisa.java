@@ -348,4 +348,68 @@ public class ControllerPesquisa implements Services{
 			throw new IllegalArgumentException("Valor invalido da ordem");
 		}
 	}
+	/**
+	 * Metodo que verifica se uma atividade ja eh associada a um poblema.
+	 * @param codigoAtividade
+	 * @return
+	 */
+	public boolean atividadeEhAssociada(String codigoAtividade) {
+		if(pesquisas.containsKey(codigoAtividade)) {
+			return true;
+		}
+		return false;
+	}
+	/**
+	 * Metodo responsavel por associar uma atividade a um problema.
+	 * @param codigoPesquisa
+	 * @param codigoAtividade
+	 * @param controleAtividade
+	 * @return
+	 */
+	public boolean associaAtividade(String codigoPesquisa, String codigoAtividade, ControllerAtividade controleAtividade) {
+		excecoes.verificaString(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
+		excecoes.verificaString(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		if(pesquisas.containsKey(codigoPesquisa)) {
+			if(pesquisaEhAtiva(codigoPesquisa)== true) {
+				Pesquisa p = pesquisas.get(codigoPesquisa);
+				Atividade a = controleAtividade.pegaCodigo(codigoAtividade);
+				if(controleAtividade.ativExiste(codigoAtividade)) {
+					return p.associaAtividade(a);
+				}
+				throw new IllegalArgumentException("Atividade nao encontrada");
+			} else {
+				throw new IllegalArgumentException("Pesquisa desativada.");	
+			}
+		}else {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+	}
+			
+	/**
+	 * Metodo responsavel por desassociar uma atividade de um problema.
+	 * @param codigoPesquisa
+	 * @param codigoAtividade
+	 * @param controleAtividade
+	 * @return
+	 */
+	public boolean desassosciaAtividade(String codigoPesquisa,String codigoAtividade,ControllerAtividade controleAtividade) {
+		excecoes.verificaString(codigoPesquisa, "Campo codigoPesquisa nao pode ser nulo ou vazio.");
+		excecoes.verificaString(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		if(pesquisas.containsKey(codigoPesquisa)) {
+			if(pesquisaEhAtiva(codigoPesquisa)== true) {
+				Pesquisa p = pesquisas.get(codigoPesquisa);
+				Atividade a = controleAtividade.pegaCodigo(codigoAtividade);
+				if(controleAtividade.ativExiste(codigoAtividade)) {
+					return p.desassociaAtividade(a);
+				}
+				throw new IllegalArgumentException("Atividade nao encontrada");	
+			}else {
+				throw new IllegalArgumentException("Pesquisa desativada.");
+			}	
+		}else {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+	}
 }
+
+

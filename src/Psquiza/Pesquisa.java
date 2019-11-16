@@ -47,6 +47,14 @@ public class Pesquisa implements Comparable<Pesquisa>{
 	 * a um problema
 	 */
 	private boolean isAssociada;
+	/**
+	 * atividades associadas a pesquisa
+	 */
+	private Map<String, Atividade> atividades;
+	/**
+	 * Verifica se a atividade ja foi associada a uma pesquisa.
+	 */
+	private boolean ativAssociada;
 	
 	/**
 	 * Constroi uma pesquisa no sistema.
@@ -62,6 +70,7 @@ public class Pesquisa implements Comparable<Pesquisa>{
 		this.isAssociada = false;
 		this.objetivos = new HashMap<>();
 		this.qtdObjetivos = 0;
+		this.ativAssociada = false;
 	}
 	
 	public boolean isAssociada() {
@@ -95,6 +104,8 @@ public class Pesquisa implements Comparable<Pesquisa>{
 	public void setAtivado(boolean ativado) {
 		this.ativado = ativado;
 	}
+	
+
 	/**
 	 * Associa um problema a uma pesquisa. Cada pesquisa
 	 * so pode estar associada a um unico problema
@@ -196,9 +207,39 @@ public class Pesquisa implements Comparable<Pesquisa>{
 		return this.codigo;
 	}
 
+	
+
 	@Override
 	public int compareTo(Pesquisa p) {
 		return this.codigo.compareTo(p.getCodigo());
+	}
+	
+	/**
+	 * Metodo que associa uma atividade a uma pesquisa
+	 * @param a
+	 * @return
+	 */
+	public boolean associaAtividade(Atividade a) {
+		if(ativAssociada==true) {
+			return false;
+		}
+		this.atividades.put(a.getCodigo(), a);
+		a.setAtivAssociada(true);
+		return true;
+		
+	}
+
+	/**
+	 * Metodo que desassocia uma atividad ede uma pesquisa
+	 * @param a
+	 * @return
+	 */
+	public boolean desassociaAtividade(Atividade a) {
+		if(atividades.containsKey(a.getCodigo())) {
+			return false;
+		}
+		atividades.remove(a.getCodigo());
+		return true;
 	}
 
 }

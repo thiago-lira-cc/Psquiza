@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Atividade implements Comparable<Atividade>{
 	private String descricao;
@@ -11,6 +12,11 @@ public class Atividade implements Comparable<Atividade>{
 	private String descricaoRisco;
 	private String codigo;
 	private HashMap<Integer, Item> itens;
+	private boolean ativAssociada;
+	private Map<Integer,String> resultados;
+	private int numeroDoResultado;
+	private int duracao;
+	
 	
 	public Atividade(String descricao, String nivelRisco, String descricaoRisco, String codigo) {
 		this.descricao = descricao;
@@ -18,6 +24,10 @@ public class Atividade implements Comparable<Atividade>{
 		this.descricaoRisco = descricaoRisco;
 		this.codigo = codigo;
 		this.itens = new HashMap <Integer, Item>();
+		this.ativAssociada = false;
+		this.resultados =new HashMap<Integer,String>();
+		this.numeroDoResultado = numeroDoResultado;
+		this.duracao = duracao;
 	}
 
 	@Override
@@ -121,7 +131,52 @@ public class Atividade implements Comparable<Atividade>{
 	public int compareTo(Atividade o) {
 		return this.codigo.compareTo(o.getCodigo());
 	}
+	public boolean isAtivAssociada() {
+		return ativAssociada;
+	}
+
+	public void setAtivAssociada(boolean ativAssociada) {
+		this.ativAssociada = ativAssociada;
+	}
+	public int getDuracao() {
+		return duracao;
+	}
+
+	public void setDuracao(int duracao) {
+		this.duracao = duracao;
+	}
 	
+	public void executaItem(int item, int duracao) {
+		if(item >itens.size() || item <= 0) {
+			throw new IllegalArgumentException("Item nao encontrado");
+		}
+		this.itens.get(item - 1).realizar();
+		this.duracao += duracao;
+	}
+
+	public int cadastraResultado(String resultado) {
+		resultados.put(++numeroDoResultado,resultado);
+		return numeroDoResultado;
+	}
+	public boolean removeResultado(int numeroDoResultado) {
+		if(!resultados.containsKey(numeroDoResultado)){
+			throw new IllegalArgumentException("Resultado nao encontrado.");
+		}
+		this.resultados.remove(numeroDoResultado);
+		return true;
+	}
+
+	public String listaResultados() {
+		String retorna = "";
+		for(String resultado:this.resultados.values()) {
+			retorna += resultado +" | ";
+		}
+		return retorna.substring(0, retorna.length()-3);
+	}
+	
+}
+		
+
 	
 
-}
+

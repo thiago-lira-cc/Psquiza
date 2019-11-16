@@ -140,4 +140,25 @@ public class Facade {
 	public int contaItensRealizados(String codigo) {
 		return controlePsquiza.contaItensRealizados(codigo);
 	}
+	public boolean associaAtividade(String codigoPesquisa,String codigoAtividade) {
+		return controlePsquiza.associaAtividade(codigoPesquisa, codigoAtividade);
+	}
+	public boolean desassociaAtividade(String codigoPesquisa,String codigoAtividade) {
+		return controlePsquiza.desassociaAtividade(codigoPesquisa, codigoAtividade);
+	}
+	public void executaAtividade(String codigoAtividade, int item, int duracao) {
+		controlePsquiza.executaAtividade(codigoAtividade, item, duracao);
+	}
+	public void cadastraResultado(String codigoAtividade,String resultado) {
+		controlePsquiza.cadastraResultado(codigoAtividade, resultado);
+	}
+	public boolean removeResultado(String codigoAtividade,int numeroDoResultado) {
+		return controlePsquiza.removeResultado(codigoAtividade, numeroDoResultado);
+	}
+	public String listaResultados(String codigoAtividade) {
+		return controlePsquiza.listaResultados(codigoAtividade);
+	}
+	public int getDuracao(String codigoAtividade) {
+		return controlePsquiza.getDuracao(codigoAtividade);
+	}
 }
