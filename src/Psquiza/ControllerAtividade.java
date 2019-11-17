@@ -187,9 +187,9 @@ public class ControllerAtividade implements Services{
 	 * @param duracao
 	 */
 	public void executaAtividade(String codigoAtividade, int item, int duracao) {
-		excecoes.verificaString(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio");
-		excecoes.verificaItemDuracao(item, "Item nao pode ser nulo ou negativo");
-		excecoes.verificaItemDuracao(duracao, "Duracao nao pode ser nula ou negativa");
+		excecoes.verificaString(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		excecoes.verificaItemDuracao(item, "Item nao pode ser nulo ou negativo.");
+		excecoes.verificaItemDuracao(duracao, "Duracao nao pode ser nula ou negativa.");
 		this.atividades.get(codigoAtividade).executaItem(item,duracao);
 		
 	}
@@ -199,8 +199,8 @@ public class ControllerAtividade implements Services{
 	 * @param resultado
 	 */
 	public void cadastraResultado(String codigoAtividade,String resultado) {
-		excecoes.verificaString(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio");
-		excecoes.verificaString(resultado, "Campo resultado nao pode ser nulo ou vazio");
+		excecoes.verificaString(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		excecoes.verificaString(resultado, "Resultado nao pode ser nulo ou vazio.");
 		this.atividades.get(codigoAtividade).cadastraResultado(resultado);
 	}
 	/**
@@ -210,8 +210,8 @@ public class ControllerAtividade implements Services{
 	 * @return
 	 */
 	public boolean removeResultado(String codigoAtividade, int numeroDoResultado) {
-		excecoes.verificaString(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio");
-		excecoes.verificaItemDuracao(numeroDoResultado, "numeroDoResultado nao pode ser nulo ou negativo");
+		excecoes.verificaString(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
+		excecoes.verificaItemDuracao(numeroDoResultado, "numeroResultado nao pode ser nulo ou negativo.");
 		return this.atividades.get(codigoAtividade).removeResultado(numeroDoResultado);
 		
 	}
@@ -221,14 +221,14 @@ public class ControllerAtividade implements Services{
 	 * @return
 	 */
 	public String listaResultados(String codigoAtividade) {
-		excecoes.verificaString(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio");
+		excecoes.verificaString(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		if(atividades.containsKey(codigoAtividade)) {
 			return this.atividades.get(codigoAtividade).listaResultados();
 		}
-		throw new IllegalArgumentException("Atividade nao encontrada.");
+		throw new IllegalArgumentException("Atividade nao encontrada");
 	}
 	public int getDuracao(String codigoAtividade) {
-		excecoes.verificaString(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio");
+		excecoes.verificaString(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		if(atividades.containsKey(codigoAtividade)) {
 			return this.atividades.get(codigoAtividade).getDuracao();
 		}else {

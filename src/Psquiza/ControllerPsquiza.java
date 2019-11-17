@@ -226,9 +226,6 @@ public class ControllerPsquiza {
 		return controlePesquisa.desassosciaAtividade(codigoPesquisa, codigoAtividade, controleAtividade);
 	}
 	public void  executaAtividade(String codigoAtividade,int item,int duracao) {
-		if(controlePesquisa.atividadeEhAssociada(codigoAtividade)==false) {
-			throw new IllegalArgumentException("Atividade sem associacoes com pesquisas.");
-		}
 		controleAtividade.executaAtividade(codigoAtividade,item,duracao);
 	}
 	public void cadastraResultado(String codigoAtividade, String resultado) {

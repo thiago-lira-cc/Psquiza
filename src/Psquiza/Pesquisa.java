@@ -71,6 +71,7 @@ public class Pesquisa implements Comparable<Pesquisa>{
 		this.objetivos = new HashMap<>();
 		this.qtdObjetivos = 0;
 		this.ativAssociada = false;
+		this.atividades = new HashMap<>();
 	}
 	
 	public boolean isAssociada() {
@@ -220,7 +221,7 @@ public class Pesquisa implements Comparable<Pesquisa>{
 	 * @return
 	 */
 	public boolean associaAtividade(Atividade a) {
-		if(ativAssociada==true) {
+		if(atividades.containsKey(a.getCodigo())) {
 			return false;
 		}
 		this.atividades.put(a.getCodigo(), a);
@@ -235,11 +236,13 @@ public class Pesquisa implements Comparable<Pesquisa>{
 	 * @return
 	 */
 	public boolean desassociaAtividade(Atividade a) {
-		if(atividades.containsKey(a.getCodigo())) {
+		if(!atividades.containsKey(a.getCodigo())) {
 			return false;
 		}
 		atividades.remove(a.getCodigo());
+		a.setAtivAssociada(false);
 		return true;
+		
 	}
 
 }
