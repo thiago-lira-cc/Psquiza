@@ -149,8 +149,8 @@ public class Facade {
 	public void executaAtividade(String codigoAtividade, int item, int duracao) {
 		controlePsquiza.executaAtividade(codigoAtividade, item, duracao);
 	}
-	public void cadastraResultado(String codigoAtividade,String resultado) {
-		controlePsquiza.cadastraResultado(codigoAtividade, resultado);
+	public int cadastraResultado(String codigoAtividade,String resultado) {
+		return controlePsquiza.cadastraResultado(codigoAtividade, resultado);
 	}
 	public boolean removeResultado(String codigoAtividade,int numeroDoResultado) {
 		return controlePsquiza.removeResultado(codigoAtividade, numeroDoResultado);

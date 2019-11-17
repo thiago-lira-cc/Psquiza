@@ -200,11 +200,12 @@ public class ControllerAtividade implements Services{
 	 * Metodo que cadastra o resultado de uma atividade
 	 * @param codigoAtividade
 	 * @param resultado
+	 * @return 
 	 */
-	public void cadastraResultado(String codigoAtividade,String resultado) {
+	public int cadastraResultado(String codigoAtividade,String resultado) {
 		excecoes.verificaString(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		excecoes.verificaString(resultado, "Resultado nao pode ser nulo ou vazio.");
-		this.atividades.get(codigoAtividade).cadastraResultado(resultado);
+		return this.atividades.get(codigoAtividade).cadastraResultado(resultado);
 	}
 	/**
 	 * Metodo que remove um resulltado ja cadastrado.

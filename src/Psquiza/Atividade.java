@@ -159,11 +159,11 @@ public class Atividade implements Comparable<Atividade>{
 		return numeroDoResultado;
 	}
 	public boolean removeResultado(int numeroDoResultado) {
-		if(!resultados.containsKey(numeroDoResultado)){
-			throw new IllegalArgumentException("Resultado nao encontrado.");
+		if(resultados.containsKey(numeroDoResultado)){
+			this.resultados.remove(numeroDoResultado);
+			return true;
 		}
-		this.resultados.remove(numeroDoResultado);
-		return true;
+		throw new IllegalArgumentException("Resultado nao encontrado.");
 	}
 
 	public String listaResultados() {

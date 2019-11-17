@@ -228,8 +228,8 @@ public class ControllerPsquiza {
 	public void  executaAtividade(String codigoAtividade,int item,int duracao) {
 		controleAtividade.executaAtividade(codigoAtividade,item,duracao);
 	}
-	public void cadastraResultado(String codigoAtividade, String resultado) {
-		controleAtividade.cadastraResultado(codigoAtividade, resultado);
+	public int cadastraResultado(String codigoAtividade, String resultado) {
+		return controleAtividade.cadastraResultado(codigoAtividade, resultado);
 	}
 	public boolean removeResultado(String codigoAtividade,int numeroDoResultado) {
 		return controleAtividade.removeResultado(codigoAtividade, numeroDoResultado);
