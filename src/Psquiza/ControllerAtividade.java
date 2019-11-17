@@ -190,6 +190,9 @@ public class ControllerAtividade implements Services{
 		excecoes.verificaString(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		excecoes.verificaItemDuracao(item, "Item nao pode ser nulo ou negativo.");
 		excecoes.verificaItemDuracao(duracao, "Duracao nao pode ser nula ou negativa.");
+		if(atividades.get(codigoAtividade).isAtivAssociada()==false) {
+			throw new IllegalArgumentException("Atividade sem associacoes com pesquisas.");
+		}
 		this.atividades.get(codigoAtividade).executaItem(item,duracao);
 		
 	}
@@ -212,7 +215,11 @@ public class ControllerAtividade implements Services{
 	public boolean removeResultado(String codigoAtividade, int numeroDoResultado) {
 		excecoes.verificaString(codigoAtividade, "Campo codigoAtividade nao pode ser nulo ou vazio.");
 		excecoes.verificaItemDuracao(numeroDoResultado, "numeroResultado nao pode ser nulo ou negativo.");
-		return this.atividades.get(codigoAtividade).removeResultado(numeroDoResultado);
+		if(atividades.containsKey(codigoAtividade)) {
+			return this.atividades.get(codigoAtividade).removeResultado(numeroDoResultado);
+		}else {
+			throw new IllegalArgumentException("Atividade nao encontrada");
+		}
 		
 	}
 	/**

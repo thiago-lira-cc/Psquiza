@@ -150,7 +150,7 @@ public class Atividade implements Comparable<Atividade>{
 		if(item >itens.size() || item <= 0) {
 			throw new IllegalArgumentException("Item nao encontrado.");
 		}
-		this.itens.get(item - 1).realizar();
+		this.itens.get(item).realizar();
 		this.duracao += duracao;
 	}
 

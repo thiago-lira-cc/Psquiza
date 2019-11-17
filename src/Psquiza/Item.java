@@ -35,7 +35,7 @@ public class Item  implements Comparable<Item>{
 
 	public void realizar() {
 		if(this.status.equals("REALIZADO")) {
-			throw new IllegalArgumentException("Item ja realizado.");
+			throw new IllegalArgumentException("Item ja executado.");
 		}
 		this.setStatus("REALIZADO");
 		
