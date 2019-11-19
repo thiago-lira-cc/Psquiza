@@ -10,7 +10,7 @@ import java.util.Map;
  * @author Thiago Lira
  *
  */
-public class ControllerPesquisador implements Services{
+public class ControllerPesquisador implements Especialidade{
 	/**
 	 * Instancia a classe de excessoes
 	 */
@@ -44,7 +44,7 @@ public class ControllerPesquisador implements Services{
 		excessoes.verificaURL(foto, "Formato de foto invalido.");
 		
 		if (!pesquisadores.containsKey(email)) {
-			Pesquisador pesquisador = new PesquisadorExterno(nome, funcao, biografia, email, foto);
+			Pesquisador pesquisador = new Pesquisador(nome, funcao, biografia, email, foto);
 			this.pesquisadores.put(email, pesquisador);
 		}
 		
@@ -164,7 +164,7 @@ public class ControllerPesquisador implements Services{
 	 * @param termo
 	 * @return List com os resultados
 	 */
-	@Override
+	
 	public List<Busca> busca(String termo) {
 		List<Busca> resultados = new ArrayList<Busca>();
 		for (Pesquisador pesquisador : pesquisadores.values()) {
@@ -186,7 +186,13 @@ public class ControllerPesquisador implements Services{
 	}
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
 		if (pesquisadores.containsKey(email)) {
-			pesquisadores.get(email).cadastraEspecialidadeProfessor(formacao, unidade, data);
+			if (pesquisadores.get(email).getFuncao().equals("professor")) {
+				pesquisadores.get(email).cadastraEspecialidadeProfessor(formacao, unidade, data);
+			} else {
+				throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
+			}
+		} else {
+			throw new IllegalArgumentException("Pesquisadora nao encontrada.");
 		}
 	}
 
