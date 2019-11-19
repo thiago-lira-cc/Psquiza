@@ -257,5 +257,27 @@ public class ControllerPsquiza {
 	public int contaProximos(String idPrecedente) {
 		return controleAtividade.contaProximos(idPrecedente);
 	}
+	
+	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
+		excecoes.verificaString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		excecoes.verificaString(emailPesquisador, "Campo emailPesquisador nao pode ser nulo ou vazio.");
+		Pesquisador pesquisador = controlePesquisador.verificaBuscaPesquisador(emailPesquisador);
+		return controlePesquisa.associaPesquisador(idPesquisa, pesquisador);
+	}
+
+	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
+		excecoes.verificaString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
+		excecoes.verificaString(emailPesquisador, "Campo emailPesquisador nao pode ser nulo ou vazio.");
+		Pesquisador pesquisador = controlePesquisador.verificaBuscaPesquisador(emailPesquisador);
+		return controlePesquisa.desassociaPesquisador(idPesquisa, pesquisador);
+	}
+
+	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
+		excecoes.verificaString(email, "Campo email nao pode ser nulo ou vazio.");
+		excecoes.verificaString(formacao, "Campo formacao nao pode ser nulo ou vazio.");
+		excecoes.verificaString(unidade, "Campo unidade nao pode ser nulo ou vazio.");
+		excecoes.verificaString(data, "Campo data nao pode ser nulo ou vazio.");
+		controlePesquisador.cadastraEspecialidadeProfessor(email, formacao, unidade, data);
+	}
 }
 

@@ -57,6 +57,8 @@ public class Pesquisa implements Comparable<Pesquisa>{
 	 */
 	private boolean ativAssociada;
 	
+	private Pesquisador pesquisador;
+	
 	/**
 	 * Constroi uma pesquisa no sistema.
 	 * @param descricao
@@ -73,6 +75,7 @@ public class Pesquisa implements Comparable<Pesquisa>{
 		this.qtdObjetivos = 0;
 		this.ativAssociada = false;
 		this.atividades = new LinkedHashMap<>();
+		this.pesquisador = null;
 	}
 	
 	/**
@@ -327,5 +330,41 @@ public class Pesquisa implements Comparable<Pesquisa>{
 	@Override
 	public int compareTo(Pesquisa p) {
 		return this.codigo.compareTo(p.getCodigo());
+	}
+	
+	public boolean associaPesquisador(Pesquisador pesquisador) {
+		if (this.isAtivado()) {
+			if (this.getPesquisador() == null) {
+				this.setPesquisador(pesquisador);
+				return true;
+			} else {
+				return false;
+			}
+			
+		} else {
+			throw new IllegalArgumentException("Pesquisa desativada.");
+		}
+	}
+
+	public Pesquisador getPesquisador() {
+		return pesquisador;
+	}
+
+	public void setPesquisador(Pesquisador pesquisador) {
+		this.pesquisador = pesquisador;
+	}
+
+	public boolean desassociaPesquisador() {
+		if (this.isAtivado()) {
+			if (this.getPesquisador() != null) {
+				this.setPesquisador(null);
+				return true;
+			} else {
+				return false;
+			}
+			
+		} else {
+			throw new IllegalArgumentException("Pesquisa desativada.");
+		}
 	}
 }

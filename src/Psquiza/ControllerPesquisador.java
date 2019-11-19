@@ -44,7 +44,7 @@ public class ControllerPesquisador implements Services{
 		excessoes.verificaURL(foto, "Formato de foto invalido.");
 		
 		if (!pesquisadores.containsKey(email)) {
-			Pesquisador pesquisador = new Pesquisador(nome, funcao, biografia, email, foto);
+			Pesquisador pesquisador = new PesquisadorExterno(nome, funcao, biografia, email, foto);
 			this.pesquisadores.put(email, pesquisador);
 		}
 		
@@ -175,6 +175,19 @@ public class ControllerPesquisador implements Services{
 		}
 		Collections.sort(resultados);
 		return resultados;
+	}
+	
+	public Pesquisador verificaBuscaPesquisador(String emailPesquisador) {
+		if (!pesquisadores.containsKey(emailPesquisador)) {
+			throw new IllegalArgumentException("Pesquisadora nao encontrada.");
+		}else {
+			return pesquisadores.get(emailPesquisador);
+		}
+	}
+	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
+		if (pesquisadores.containsKey(email)) {
+			pesquisadores.get(email).cadastraEspecialidadeProfessor(formacao, unidade, data);
+		}
 	}
 
 }

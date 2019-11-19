@@ -489,6 +489,24 @@ public class ControllerPesquisa implements Services{
 	private String menos_pendencias(String codigoPesquisa) {
 		return this.pesquisas.get(codigoPesquisa).atividadeMenosPendencias();
 	}
+	
+	public boolean associaPesquisador(String idPesquisa, Pesquisador pesquisador) {
+		if (pesquisas.containsKey(idPesquisa)) {
+			return pesquisas.get(idPesquisa).associaPesquisador(pesquisador);
+			
+		} else {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+	}
+
+	public boolean desassociaPesquisador(String idPesquisa, Pesquisador pesquisador) {
+		if (pesquisas.containsKey(idPesquisa)) {
+			return pesquisas.get(idPesquisa).desassociaPesquisador();
+			
+		} else {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+	}
 }
 
 

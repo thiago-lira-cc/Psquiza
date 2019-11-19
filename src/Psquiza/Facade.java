@@ -178,4 +178,16 @@ public class Facade {
 	public int contaProximos(String idPrecedente) {
 		return controlePsquiza.contaProximos(idPrecedente);
 	}
+	
+	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
+		return controlePsquiza.associaPesquisador(idPesquisa,emailPesquisador);
+	}
+	
+	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
+		return controlePsquiza.desassociaPesquisador(idPesquisa, emailPesquisador);
+	}
+	
+	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
+		controlePsquiza.cadastraEspecialidadeProfessor(email,formacao,unidade,data);
+	}
 }
