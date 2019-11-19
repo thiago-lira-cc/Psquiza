@@ -240,7 +240,22 @@ public class ControllerPsquiza {
 
 	public int getDuracao(String codigoAtividade) {
 		return controleAtividade.getDuracao(codigoAtividade);
-		
+	}
+	
+	public void configuraEstrategia(String estrategia) {
+		controlePesquisa.configuraEstrategia(estrategia);
+	}
+	public String proximaAtividade(String codigoPesquisa) {
+		return controlePesquisa.proximaAtividade(codigoPesquisa);
+	}
+	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
+		controleAtividade.defineProximaAtividade(idPrecedente, idSubsquente);
+	}
+	public void tiraProximaAtividade(String idPrecedente) {
+		controleAtividade.tiraProximaAtividade(idPrecedente);
+	}
+	public int contaProximos(String idPrecedente) {
+		return controleAtividade.contaProximos(idPrecedente);
 	}
 }
 

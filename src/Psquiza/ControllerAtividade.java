@@ -243,5 +243,55 @@ public class ControllerAtividade implements Services{
 			throw new IllegalArgumentException("Atividade nao encontrada");
 		}		
 	}
-
+	/**
+	 * Metodo que defini uma proxima atividade a ser realizada
+	 * @param idPrecedente
+	 * @param idSubsquente
+	 */
+	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
+		excecoes.verificaString(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
+		excecoes.verificaString(idSubsquente, "Atividade nao pode ser nulo ou vazio.");
+		if (this.atividades.containsKey(idPrecedente)&&this.atividades.containsKey(idSubsquente)) {
+			if (this.atividades.get(idPrecedente).getProxima()==null) {	
+				if (this.atividades.get(idSubsquente).getProxima()!=null) {
+					if (this.atividades.get(idSubsquente).getProxima().equals(this.atividades.get(idPrecedente))) {
+						throw new IllegalArgumentException("Criacao de loops negada.");
+					}
+				}
+				this.atividades.get(idPrecedente).setProxima(this.atividades.get(idSubsquente));
+			}else {
+				throw new IllegalArgumentException("Atividade ja possui uma subsequente.");
+			}
+		}else {
+			throw new IllegalArgumentException("Atividade nao encontrada.");
+		}
+	}
+	/**
+	 * remove a proxima atividade
+	 * @param idPrecedente
+	 */
+	public void tiraProximaAtividade(String idPrecedente) {
+		excecoes.verificaString(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
+		if (atividades.containsKey(idPrecedente)) {
+			atividades.get(idPrecedente).setProxima(null);
+		}else {
+			throw new IllegalArgumentException("Atividade nao encontrada.");
+		}
+	}
+	/**
+	 * Conta quantas atividades tem depois de uma especifica
+	 * @param idPrecedente
+	 * @return
+	 */
+	public int contaProximos(String idPrecedente) {
+		excecoes.verificaString(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
+		if(atividades.containsKey(idPrecedente)) {
+			if (atividades.get(idPrecedente).getProxima()==null) {
+				return 0;
+			}else {
+				return 1 + contaProximos(atividades.get(idPrecedente).getProxima().getCodigo());
+			}
+		}
+		throw new IllegalArgumentException("Atividade inexistente.");
+	}
 }

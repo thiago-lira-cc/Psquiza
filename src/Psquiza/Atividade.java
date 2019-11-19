@@ -16,7 +16,7 @@ public class Atividade implements Comparable<Atividade>{
 	private Map<Integer,String> resultados;
 	private int numeroDoResultado;
 	private int duracao;
-	
+	private Atividade proxima;
 	
 	public Atividade(String descricao, String nivelRisco, String descricaoRisco, String codigo) {
 		this.descricao = descricao;
@@ -26,10 +26,17 @@ public class Atividade implements Comparable<Atividade>{
 		this.itens = new HashMap <Integer, Item>();
 		this.ativAssociada = false;
 		this.resultados =new HashMap<Integer,String>();
-		this.numeroDoResultado = numeroDoResultado;
-		this.duracao = duracao;
+		this.proxima = null;
 	}
 
+	public void setProxima(Atividade proxima) {
+		this.proxima = proxima;
+	}
+
+	public Atividade getProxima() {
+		return proxima;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -172,6 +179,10 @@ public class Atividade implements Comparable<Atividade>{
 			retorna += resultado +" | ";
 		}
 		return retorna.substring(0, retorna.length()-3);
+	}
+	
+	public String getNivelDeRisco() {
+		return this.nivelRisco;
 	}
 	
 }

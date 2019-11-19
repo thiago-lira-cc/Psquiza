@@ -10,7 +10,9 @@ public class Facade {
 		args = new String[] {"Psquiza.Facade", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",
 				   "testes_aceitacao/use_case_3.txt", "testes_aceitacao/use_case_4.txt",
 				   "testes_aceitacao/use_case_5.txt", "testes_aceitacao/use_case_6.txt",
-				   "testes_aceitacao/use_case_7.txt", "testes_aceitacao/use_case_8.txt"};
+				   "testes_aceitacao/use_case_7.txt", "testes_aceitacao/use_case_8.txt",
+				   "testes_aceitacao/use_case_9.txt", "testes_aceitacao/use_case_10.txt",
+				   "testes_aceitacao/use_case_11.txt"};
 		EasyAccept.main(args);
 	}
 	
@@ -160,5 +162,20 @@ public class Facade {
 	}
 	public int getDuracao(String codigoAtividade) {
 		return controlePsquiza.getDuracao(codigoAtividade);
+	}
+	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
+		controlePsquiza.defineProximaAtividade(idPrecedente, idSubsquente);
+	}
+	public void configuraEstrategia(String estrategia) {
+		controlePsquiza.configuraEstrategia(estrategia);
+	}
+	public String proximaAtividade(String codigoPesquisa) {
+		return controlePsquiza.proximaAtividade(codigoPesquisa);
+	}
+	public void tiraProximaAtividade(String idPrecedente) {
+		controlePsquiza.tiraProximaAtividade(idPrecedente);
+	}
+	public int contaProximos(String idPrecedente) {
+		return controlePsquiza.contaProximos(idPrecedente);
 	}
 }

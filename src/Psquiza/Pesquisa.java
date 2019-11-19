@@ -3,6 +3,7 @@ package Psquiza;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -71,42 +72,9 @@ public class Pesquisa implements Comparable<Pesquisa>{
 		this.objetivos = new HashMap<>();
 		this.qtdObjetivos = 0;
 		this.ativAssociada = false;
-		this.atividades = new HashMap<>();
+		this.atividades = new LinkedHashMap<>();
 	}
 	
-	public boolean isAssociada() {
-		return isAssociada;
-	}
-
-	public void setAssociada(boolean isAssociada) {
-		this.isAssociada = isAssociada;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public String getCampoDeInteresse() {
-		return campoDeInteresse;
-	}
-
-	public void setCampoDeInteresse(String campoDeInteresse) {
-		this.campoDeInteresse = campoDeInteresse;
-	}
-
-	public boolean isAtivado() {
-		return ativado;
-	}
-
-	public void setAtivado(boolean ativado) {
-		this.ativado = ativado;
-	}
-	
-
 	/**
 	 * Associa um problema a uma pesquisa. Cada pesquisa
 	 * so pode estar associada a um unico problema
@@ -191,30 +159,6 @@ public class Pesquisa implements Comparable<Pesquisa>{
 		return lista;
 	}
 	
-	public int getQtdObjetivos() {
-		return qtdObjetivos;
-	}
-	
-	/**
-	 * Representacao String de uma pesquisa no sistema.
-	 * @return a representacao de uma pesquisa no formato "codigo - descrica - campo de interesse"
-	 */
-	@Override
-	public String toString() {
-		return codigo + " - " + descricao +" - "+ campoDeInteresse;
-	}
-
-	public String getCodigo() {
-		return this.codigo;
-	}
-
-	
-
-	@Override
-	public int compareTo(Pesquisa p) {
-		return this.codigo.compareTo(p.getCodigo());
-	}
-	
 	/**
 	 * Metodo que associa uma atividade a uma pesquisa
 	 * @param a
@@ -244,5 +188,144 @@ public class Pesquisa implements Comparable<Pesquisa>{
 		return true;
 		
 	}
+	
+	/**
+	 * Retorna a atividade mais antiga associada
+	 * @return String do codigo da atividade
+	 */
+	public String atividadeMaisAntiga() {
+		for (Atividade atividade : this.atividades.values()) {
+			if (atividade.contaItensPendentes()>0) {
+				return atividade.getCodigo();
+			}
+		}
+		throw new IllegalArgumentException("Pesquisa sem atividades com pendencias.");
+	}
+	/**
+	 * Retorna a atividade de maior duracao
+	 * @return String do codigo da atividade
+	 */
+	public String atividadeMaiorDuracao() {
+		Atividade maior = null;
+		boolean ehPrimeiro = true;
+		for (Atividade atividade : this.atividades.values()) {
+			if (ehPrimeiro) {
+				maior = atividade;
+				ehPrimeiro = false;
+			}else {
+				if (maior.getDuracao()<atividade.getDuracao()) {
+					maior = atividade;
+				}
+			}
+		}
+		return maior.getCodigo();
+	}
+	/**
+	 * Retorna a atividade de maior risco
+	 * @return String do codigo da atividade
+	 */
+	public String atividadeMaiorRisco() {
+		for (Atividade atividade : this.atividades.values()) {
+			if (atividade.getNivelDeRisco().equals("ALTO")) {
+				return atividade.getCodigo();
+			}
+		}
+		for (Atividade atividade : this.atividades.values()) {
+			if (atividade.getNivelDeRisco().equals("MEDIO")) {
+				return atividade.getCodigo();
+			}
+		}
+		for (Atividade atividade : this.atividades.values()) {
+			if (atividade.getNivelDeRisco().equals("BAIXO")) {
+				return atividade.getCodigo();
+			}
+		}
+		throw new IllegalArgumentException("Atividade sem risco.");
+	}
+	/**
+	 * Retorna a atividade que tem menos pendencias
+	 * @return String do codigo da atividade
+	 */
+	public String atividadeMenosPendencias() {
+		Atividade menoresPendencias = null;
+		boolean ehPrimeiro = true;
+		for (Atividade atividade : this.atividades.values()) {
+			if (ehPrimeiro) {
+				if (atividade.contaItensPendentes()>0) {
+					menoresPendencias = atividade;
+					ehPrimeiro = false;
+				}
+				
+			}else {
+				if (atividade.contaItensPendentes()>0) {
+					if (atividade.contaItensPendentes()<menoresPendencias.contaItensPendentes()) {
+						menoresPendencias = atividade;
+					}
+				}
+			}
+		}
+		return menoresPendencias.getCodigo();
+	}
 
+	public int getQtdObjetivos() {
+		return qtdObjetivos;
+	}
+	
+	public boolean isAtivAssociada() {
+		return ativAssociada;
+	}
+	
+	public Map<String, Atividade> getAtividades() {
+		return atividades;
+	}
+	
+	public boolean isAssociada() {
+		return isAssociada;
+	}
+
+	public void setAssociada(boolean isAssociada) {
+		this.isAssociada = isAssociada;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public String getCampoDeInteresse() {
+		return campoDeInteresse;
+	}
+
+	public void setCampoDeInteresse(String campoDeInteresse) {
+		this.campoDeInteresse = campoDeInteresse;
+	}
+
+	public boolean isAtivado() {
+		return ativado;
+	}
+
+	public void setAtivado(boolean ativado) {
+		this.ativado = ativado;
+	}
+	
+	public String getCodigo() {
+		return this.codigo;
+	}
+	
+	/**
+	 * Representacao String de uma pesquisa no sistema.
+	 * @return a representacao de uma pesquisa no formato "codigo - descrica - campo de interesse"
+	 */
+	@Override
+	public String toString() {
+		return codigo + " - " + descricao +" - "+ campoDeInteresse;
+	}
+
+	@Override
+	public int compareTo(Pesquisa p) {
+		return this.codigo.compareTo(p.getCodigo());
+	}
 }

@@ -2,7 +2,7 @@ package Psquiza;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,10 +14,15 @@ public class ControllerPesquisa implements Services{
 	 */
 	private Map<String, Pesquisa> pesquisas;
 	/**
+	 * Estrategia de escolha da proxima atividade
+	 */
+	private String estrategia;
+	/**
 	 * Constroi a classe instanciando um novo HashMap
 	 */
 	public ControllerPesquisa() {
-		this.pesquisas = new HashMap<String, Pesquisa>();
+		this.pesquisas = new LinkedHashMap<String, Pesquisa>();
+		this.estrategia = "MAIS_ANTIGA";
 	}
 	
 	/**
@@ -409,6 +414,80 @@ public class ControllerPesquisa implements Services{
 		}else {
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}
+	}
+	/**
+	 * Modifica a estrategia de escolha da proxima atividade
+	 * @param estrategia
+	 */
+	public void configuraEstrategia(String estrategia) {
+		excecoes.verificaString(estrategia, "Estrategia nao pode ser nula ou vazia.");
+		switch (estrategia) {
+		case "MAIS_ANTIGA":
+			this.estrategia = estrategia;
+			break;
+		case "MENOS_PENDENCIAS":
+			this.estrategia = "MENOS_PENDENCIAS";
+			break;
+		case "MAIOR_RISCO":
+			this.estrategia = "MAIOR_RISCO";
+			break;
+		case "MAIOR_DURACAO":
+			this.estrategia = "MAIOR_DURACAO";
+			break;
+		default:
+			throw new IllegalArgumentException("Valor invalido da estrategia");
+		}
+	}
+	/**
+	 * Metodo que retorna a proxima atividade de acordo com a estrategia configurada
+	 * @param codigoPesquisa
+	 * @return
+	 */
+	public String proximaAtividade(String codigoPesquisa) {
+		excecoes.verificaString(codigoPesquisa, "Pesquisa nao pode ser nula ou vazia.");
+		if (pesquisas.containsKey(codigoPesquisa)) {
+			if (pesquisas.get(codigoPesquisa).isAtivado()) {
+				boolean pendente = false;
+				for (Atividade atividade : pesquisas.get(codigoPesquisa).getAtividades().values()) {
+					if (atividade.contaItensPendentes()>0) {
+						pendente = true;
+					}
+				}
+				if (pendente) {
+					switch (this.estrategia) {
+					case "MENOS_PENDENCIAS":
+						return menos_pendencias(codigoPesquisa);
+					case "MAIOR_RISCO":
+						return maior_risco(codigoPesquisa);
+					case "MAIOR_DURACAO":
+						return maior_duracao(codigoPesquisa);
+					default:
+						return mais_antiga(codigoPesquisa);
+					}
+				}else {
+					throw new IllegalArgumentException("Pesquisa sem atividades com pendencias.");
+				}
+			}else {
+				throw new IllegalArgumentException("Pesquisa desativada.");
+			}
+		}
+		throw new IllegalArgumentException("Pesquisa nao encontrada.");
+	}
+
+	private String mais_antiga(String codigoPesquisa) {
+		return this.pesquisas.get(codigoPesquisa).atividadeMaisAntiga();
+	}
+
+	private String maior_duracao(String codigoPesquisa) {
+		return this.pesquisas.get(codigoPesquisa).atividadeMaiorDuracao();
+	}
+
+	private String maior_risco(String codigoPesquisa) {
+		return this.pesquisas.get(codigoPesquisa).atividadeMaiorRisco();
+	}
+
+	private String menos_pendencias(String codigoPesquisa) {
+		return this.pesquisas.get(codigoPesquisa).atividadeMenosPendencias();
 	}
 }
 
