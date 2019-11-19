@@ -1,5 +1,7 @@
 package Psquiza;
 
+import java.io.IOException;
+
 import easyaccept.EasyAccept;
 
 public class Facade {
@@ -7,12 +9,12 @@ public class Facade {
 	private ControllerPsquiza controlePsquiza;
 
 	public static void main(String[] args) {
-		args = new String[] {"Psquiza.Facade", "testes_aceitacao/use_case_1.txt", "testes_aceitacao/use_case_2.txt",
-				   "testes_aceitacao/use_case_3.txt", "testes_aceitacao/use_case_4.txt",
-				   "testes_aceitacao/use_case_5.txt", "testes_aceitacao/use_case_6.txt",
-				   "testes_aceitacao/use_case_7.txt", "testes_aceitacao/use_case_8.txt",
-				   "testes_aceitacao/use_case_9.txt", "testes_aceitacao/use_case_10.txt",
-				   "testes_aceitacao/use_case_11.txt"};
+		args = new String[] {"Psquiza.Facade", "easyaccept/use_case_1.txt", "easyaccept/use_case_2.txt",
+				   "easyaccept/use_case_3.txt", "easyaccept/use_case_4.txt",
+				   "easyaccept/use_case_5.txt", "easyaccept/use_case_6.txt",
+				   "easyaccept/use_case_7.txt", "easyaccept/use_case_8.txt",
+				   "easyaccept/use_case_9.txt", "easyaccept/use_case_10.txt",
+				   "easyaccept/use_case_11.txt"};
 		EasyAccept.main(args);
 	}
 	
@@ -189,5 +191,13 @@ public class Facade {
 	
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
 		controlePsquiza.cadastraEspecialidadeProfessor(email,formacao,unidade,data);
+	}
+	
+	public void gravarResumo(String idPesquisa) throws IOException {
+		controlePsquiza.gravarResumo(idPesquisa);
+	}
+	
+	public void gravarResultados(String idPesquisa) throws IOException {
+		controlePsquiza.gravarResultados(idPesquisa);
 	}
 }

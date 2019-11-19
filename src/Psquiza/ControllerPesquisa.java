@@ -507,6 +507,34 @@ public class ControllerPesquisa implements Services{
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}
 	}
+	
+	/**
+	 * Gera o resumo de uma pesquisa a partir do seu id
+	 * @param idPesquisa
+	 * @return o resumo
+	 */
+	public String geraResumo(String idPesquisa) {
+		excecoes.verificaString(idPesquisa, "Pesquisa nao pode ser nula ou vazia.");
+		if (!pesquisas.containsKey(idPesquisa)) {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+		Pesquisa p = pesquisas.get(idPesquisa);
+		return p.geraResumo(idPesquisa);
+	}
+	
+	/**
+	 * Gera os resultados de uma pesquisa a partir do seu id
+	 * @param idPesquisa
+	 * @return os resultados
+	 */
+	public String resumeResultados(String idPesquisa) {
+		excecoes.verificaString(idPesquisa, "Pesquisa nao pode ser nula ou vazia.");
+		if (!pesquisas.containsKey(idPesquisa)) {
+			throw new IllegalArgumentException("Pesquisa nao encontrada.");
+		}
+		Pesquisa p = pesquisas.get(idPesquisa);
+		return p.resumeResultados();
+	}
 }
 
 

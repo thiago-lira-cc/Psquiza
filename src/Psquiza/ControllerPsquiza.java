@@ -1,5 +1,8 @@
 package Psquiza;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -278,6 +281,35 @@ public class ControllerPsquiza {
 		excecoes.verificaString(unidade, "Campo unidade nao pode ser nulo ou vazio.");
 		excecoes.verificaString(data, "Campo data nao pode ser nulo ou vazio.");
 		controlePesquisador.cadastraEspecialidadeProfessor(email, formacao, unidade, data);
+	}
+	
+	/**
+	 * Exporta o resumo de uma pesquisa em arquivo texto
+	 * a partir do seu id
+	 * @param idPesquisa
+	 * @throws IOException
+	 */
+	public void gravarResumo(String idPesquisa) throws IOException {
+		String resumo = controlePesquisa.geraResumo(idPesquisa);
+		File f = new File("_"+idPesquisa+".txt");
+		FileWriter fw = new FileWriter(f);
+		fw.write(resumo);
+		fw.close();
+		
+	}
+	
+	/**
+	 * Exporta os resultados de uma pesquisa em arquivo texto
+	 * a partir do seu id
+	 * @param idPesquisa
+	 * @throws IOException
+	 */
+	public void gravarResultados(String idPesquisa) throws IOException {
+		String resultado = controlePesquisa.resumeResultados(idPesquisa);
+		File f = new File(idPesquisa+"-Resultados.txt");
+		FileWriter fw = new FileWriter(f);
+		fw.write(resultado);
+		fw.close();
 	}
 }
 

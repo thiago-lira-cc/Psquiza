@@ -184,7 +184,50 @@ public class Atividade implements Comparable<Atividade>{
 	public String getNivelDeRisco() {
 		return this.nivelRisco;
 	}
+	/**
+	 * Gera um resumo da atividade a partir do seu toString()
+	 * e do toString() de cada um de seus itens
+	 * @return resumo
+	 */
+	public String resumeAtividade() {
+		String resul = "";
+		int cont = 1;
+		resul += "- "+toString()+System.lineSeparator()+"   ";
+		for (Item i : this.itens.values()) {
+			resul += "- "+i.getStatus()+" - ITEM"+cont;
+			cont++;
+		}
+		return resul;
+	}
+	/**
+	 * Gera os resultados de cada atividade
+	 * @return os resultados da atividade
+	 */
+	public String resultadosAtividade() {
+		String resul = "- Resultados:"+System.lineSeparator()+"    - "
+				+this.descricao+System.lineSeparator();
+		return resul+representaResultados();
+	}
 	
+	/**
+	 * Gera um resumo dos resultados de uma atividade, de acordo com
+	 * seus itens e resultados
+	 * @return os resultados
+	 */
+	public String representaResultados() {
+		String resul = "";
+		int cont = 1;
+		for (Item i : this.itens.values()) {
+			if (i.getStatus().equals("REALIZADO")) {
+				resul += "   - ITEM"+cont+" - "+(duracao/itens.size())+System.lineSeparator();
+				cont++;
+			}
+		}
+		for (String r : this.resultados.values()) {
+			resul += "   - "+r+System.lineSeparator();
+		}
+		return resul;
+	}
 }
 		
 

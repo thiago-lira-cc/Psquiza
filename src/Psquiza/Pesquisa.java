@@ -367,4 +367,42 @@ public class Pesquisa implements Comparable<Pesquisa>{
 			throw new IllegalArgumentException("Pesquisa desativada.");
 		}
 	}
+	
+	/**
+	 * Gera uma String de resumo de uma pesquisa
+	 * @param idPesquisa
+	 * @return o resumo
+	 */
+	public String geraResumo(String idPesquisa) {
+		String result = "- Pesquisa: " + toString();
+		result +=System.lineSeparator() + "   - Pesquisadores:"+System.lineSeparator();
+		/*for (Pesquisador pesquisador : pesquisadores) {
+			result += "   - "+pesquisador.toString()+System.lineSeparator();
+		}*/
+		result += "- Problema:"+System.lineSeparator()+"   - "+this.problema.toString()+System.lineSeparator();
+		result += "- Objetivos:"+System.lineSeparator();
+		for (Objetivo o : this.objetivos.values()) {
+			result += "   - "+o.toString();
+		}
+		result += "- Atividades:"+System.lineSeparator();
+		for (Atividade a : this.atividades.values()) {
+			result += a.resumeAtividade();
+		}
+		return result;
+	}
+	
+	/**
+	 * Gera uma String com os resultados da pesquisa
+	 * @return os resultados
+	 */
+	public String resumeResultados() {
+		String result = "- Pesquisa: " + toString();
+		if (atividades.size()>0) {
+			result += System.lineSeparator() + "   ";
+			for (Atividade a : this.atividades.values()) {
+				result += a.resultadosAtividade();
+			}
+		}
+		return result;
+	}
 }
