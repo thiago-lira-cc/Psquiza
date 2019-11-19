@@ -311,5 +311,13 @@ public class ControllerPsquiza {
 		fw.write(resultado);
 		fw.close();
 	}
+
+	public String pegaProximo(String idAtividade, int enesimaAtividade) {
+		return controleAtividade.pegaProximo(idAtividade, enesimaAtividade);
+	}
+
+	public String pegaMaiorRisco(String idAtividade) {
+		return controleAtividade.pegaMaiorRisco(idAtividade);
+	}
 }
 

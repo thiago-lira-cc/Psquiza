@@ -180,6 +180,12 @@ public class Facade {
 	public int contaProximos(String idPrecedente) {
 		return controlePsquiza.contaProximos(idPrecedente);
 	}
+	public String pegaProximo(String idAtividade, int enesimaAtividade) {
+		return controlePsquiza.pegaProximo(idAtividade, enesimaAtividade);
+	}
+	public String pegaMaiorRiscoAtividades(String idAtividade) {
+		return controlePsquiza.pegaMaiorRisco(idAtividade);
+	}
 	
 	public boolean associaPesquisador(String idPesquisa, String emailPesquisador) {
 		return controlePsquiza.associaPesquisador(idPesquisa,emailPesquisador);

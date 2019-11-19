@@ -125,5 +125,15 @@ public class Excecoes {
 			
 		}
 	}
+	/**
+	 * Verifica se o numero passado como parametro eh positivo
+	 * @param numeroDoResultado
+	 * @param msg
+	 */
+	public void verificaNumero(int numeroDoResultado, String msg) {
+		if (numeroDoResultado<=0) {
+			throw new IllegalArgumentException(msg);
+		}
+	}
 	
 }

@@ -228,6 +228,40 @@ public class Atividade implements Comparable<Atividade>{
 		}
 		return resul;
 	}
+
+	public String pegaMaiorRisco(String risco) {
+		if (proxima!=null&&!(proxima.temRiscoMaior(risco).equals(""))) {
+			return proxima.pegaMaiorRisco(this.temRiscoMaior(risco));
+		}
+		return this.codigo;
+	}
+	private String temRiscoMaior(String risco) {
+		if (risco.equals("BAIXO")) {
+			if (this.nivelRisco.equals("BAIXO")||this.nivelRisco.equals("MEDIO")||this.nivelRisco.equals("ALTO")) {
+				return this.nivelRisco;
+			}
+			if (this.proxima==null) {
+				return "";
+			}
+		}
+		if (risco.equals("MEDIO")) {
+			if (this.nivelRisco.equals("MEDIO")||this.nivelRisco.equals("ALTO")) {
+				return this.nivelRisco;
+			}
+			if (this.proxima==null) {
+				return "";
+			}
+		}
+		else {
+			if (this.nivelRisco.equals("ALTO")) {
+				return this.nivelRisco;
+			}
+			if (this.proxima==null) {
+				return "";
+			}
+		}
+		return this.proxima.temRiscoMaior(risco);
+	}
 }
 		
 

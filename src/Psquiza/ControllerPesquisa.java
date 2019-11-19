@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ControllerPesquisa implements Services{
+public class ControllerPesquisa{
 
 	private Excecoes excecoes = new Excecoes();
 	/**
@@ -143,7 +143,6 @@ public class ControllerPesquisa implements Services{
 	 * @param termo
 	 * @return List com os resultados
 	 */
-	@Override
 	public List<Busca> busca(String termo) {
 		List<Busca> resultados = new ArrayList<Busca>();
 		List<Pesquisa> pesquisas = getPesquisas();

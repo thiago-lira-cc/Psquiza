@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ControllerProblema implements Services{
+public class ControllerProblema{
 	private Map<String, Problema> problemas;
 	private Excecoes excecoes;
 	private int contCodigo;
@@ -63,7 +63,6 @@ public class ControllerProblema implements Services{
 	 * @param termo
 	 * @return List com os resultados
 	 */
-	@Override
 	public List<Busca> busca(String termo) {
 		List<Busca> resultados = new ArrayList<Busca>();
 		for (Problema problema : problemas.values()) {

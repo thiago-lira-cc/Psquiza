@@ -11,7 +11,7 @@ import java.util.Map;
  *
  */
 
-public class ControllerObjetivo implements Services{
+public class ControllerObjetivo{
 	/**
 	 * Mapa de objetivos identificados pelo codigo
 	 */
@@ -118,7 +118,6 @@ public class ControllerObjetivo implements Services{
 	 * @param termo
 	 * @return List com os resultados
 	 */
-	@Override
 	public List<Busca> busca(String termo) {
 		List<Busca> resultados = new ArrayList<Busca>();
 		for (Objetivo objetivo : objetivos.values()) {

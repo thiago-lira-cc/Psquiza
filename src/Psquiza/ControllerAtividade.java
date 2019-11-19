@@ -11,7 +11,7 @@ import java.util.Map;
  * @author 
  *
  */
-public class ControllerAtividade implements Services{
+public class ControllerAtividade{
 	private Map <String, Atividade> atividades;
 	private Excecoes excecoes;
 	private int contCodigo;
@@ -116,7 +116,6 @@ public class ControllerAtividade implements Services{
 	 * @param termo
 	 * @return List com os resultados
 	 */
-	@Override
 	public List<Busca> busca(String termo) {
 		List<Busca> resultados = new ArrayList<Busca>();
 		List<Atividade> atividades = getAtividades();
@@ -251,20 +250,47 @@ public class ControllerAtividade implements Services{
 	public void defineProximaAtividade(String idPrecedente, String idSubsquente) {
 		excecoes.verificaString(idPrecedente, "Atividade nao pode ser nulo ou vazio.");
 		excecoes.verificaString(idSubsquente, "Atividade nao pode ser nulo ou vazio.");
+		Atividade precedente = atividades.get(idPrecedente);
+		Atividade subsequente = atividades.get(idSubsquente);
 		if (this.atividades.containsKey(idPrecedente)&&this.atividades.containsKey(idSubsquente)) {
-			if (this.atividades.get(idPrecedente).getProxima()==null) {	
-				if (this.atividades.get(idSubsquente).getProxima()!=null) {
-					if (this.atividades.get(idSubsquente).getProxima().equals(this.atividades.get(idPrecedente))) {
-						throw new IllegalArgumentException("Criacao de loops negada.");
+			if (precedente.getProxima()==null) {	
+				List<Atividade> ativids = new ArrayList<>();
+				ativids.addAll(atividades.values());
+				Collections.sort(ativids, new ComparadorAtividade());
+				for (Atividade atividade : ativids) {
+					if (valido(atividade, precedente)) {
+						if (valido(atividade, subsequente)) {
+							throw new IllegalArgumentException("Criacao de loops negada.");
+							
+						}else {
+							precedente.setProxima(subsequente);
+							break;
+						}
 					}
+					
 				}
-				this.atividades.get(idPrecedente).setProxima(this.atividades.get(idSubsquente));
+				
 			}else {
 				throw new IllegalArgumentException("Atividade ja possui uma subsequente.");
 			}
 		}else {
 			throw new IllegalArgumentException("Atividade nao encontrada.");
 		}
+	}
+	/**
+	 * Metodo que retorna se a proxima atividade eh valida
+	 * @param origem
+	 * @param proximo
+	 * @return
+	 */
+	public boolean valido(Atividade origem, Atividade proximo) {
+		while (origem!=null) {
+			if (origem.equals(proximo)) {
+				return true;
+			}
+			origem = origem.getProxima();
+		}
+		return false;
 	}
 	/**
 	 * remove a proxima atividade
@@ -293,5 +319,51 @@ public class ControllerAtividade implements Services{
 			}
 		}
 		throw new IllegalArgumentException("Atividade inexistente.");
+	}
+
+	/**
+	 * Metodo que busca um atividade de acordo com uma posicao enesima a partir da atual
+	 * @param idAtividade
+	 * @param enesimaAtividade
+	 * @return String do codigo da atividade
+	 */
+	public String pegaProximo(String idAtividade, int enesimaAtividade) {
+		excecoes.verificaString(idAtividade, "Atividade nao pode ser nulo ou vazio.");
+		excecoes.verificaNumero(enesimaAtividade, "EnesimaAtividade nao pode ser negativa ou zero.");
+		if (atividades.containsKey(idAtividade)) {
+			return pegaProximo(idAtividade, 0,  enesimaAtividade);
+		}
+		throw new IllegalArgumentException("Atividade inexistente.");
+	}
+	/**
+	 * Metodo recursivo que verifica se ja chegou na posicao desejado
+	 * @param idAtividade
+	 * @param pos
+	 * @param enesimaAtividade
+	 * @return String do codigo da atividade
+	 */
+	private String pegaProximo(String idAtividade, int pos, int enesimaAtividade) {
+		if (pos==enesimaAtividade) {
+			return atividades.get(idAtividade).getCodigo();
+		}
+		if (atividades.get(idAtividade).getProxima()==null) {
+			throw new IllegalArgumentException("Atividade inexistente.");
+		}
+		return pegaProximo(atividades.get(idAtividade).getProxima().getCodigo(), pos+1, enesimaAtividade);
+	}
+	
+	/**
+	 * Metoque que retorna a atividade de maior risco dentro da sequencia da atividade passada no parametro
+	 * @param idAtividade
+	 * @return
+	 */
+	public String pegaMaiorRisco(String idAtividade) {
+		excecoes.verificaString(idAtividade, "Atividade nao pode ser nulo ou vazio.");
+		if (!atividades.containsKey(idAtividade)) {
+			throw new IllegalArgumentException("Atividade nao encontrada.");
+		}else if(atividades.get(idAtividade).getProxima()==null) {
+			throw new IllegalArgumentException("Nao existe proxima atividade.");
+		}
+		return atividades.get(idAtividade).pegaMaiorRisco(atividades.get(idAtividade).getProxima().getNivelDeRisco());
 	}
 }
