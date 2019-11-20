@@ -1,6 +1,11 @@
 package Psquiza;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 /**
  * Classe responsavel pela verificacao de formatos e excessoes
@@ -134,11 +139,30 @@ public class Excecoes implements Serializable{
 	}
 	/**
 	 * Verifica se o numero passado como parametro eh positivo
-	 * @param numeroDoResultado
+	 * @param novoValor
 	 * @param msg
 	 */
-	public void verificaNumero(int numeroDoResultado, String msg) {
-		if (numeroDoResultado<=0) {
+	public void verificaNumero(int novoValor, String msg) {
+		if (novoValor<=0) {
+			throw new IllegalArgumentException(msg);
+		}
+	}
+	
+	public void verficaDataValida(String valor, String msg) {
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		try {
+			formatter.parse(valor);
+		} catch (DateTimeParseException e) {
+			throw new IllegalArgumentException(msg);
+		}
+	}
+
+	
+	public void verificaIEA(double valor, String msg) {
+		
+		
+		if (valor < 0 || valor >10) {
 			throw new IllegalArgumentException(msg);
 		}
 	}

@@ -62,7 +62,7 @@ public class Pesquisa implements Comparable<Pesquisa>, Serializable{
 	 */
 	private boolean ativAssociada;
 	
-	private Pesquisador pesquisador;
+	private Map<String,Pesquisador> pesquisadores;
 	
 	/**
 	 * Constroi uma pesquisa no sistema.
@@ -80,7 +80,7 @@ public class Pesquisa implements Comparable<Pesquisa>, Serializable{
 		this.qtdObjetivos = 0;
 		this.ativAssociada = false;
 		this.atividades = new LinkedHashMap<>();
-		this.pesquisador = null;
+		this.pesquisadores = new HashMap<>();
 	}
 	
 	/**
@@ -337,32 +337,26 @@ public class Pesquisa implements Comparable<Pesquisa>, Serializable{
 		return this.codigo.compareTo(p.getCodigo());
 	}
 	
-	public boolean associaPesquisador(Pesquisador pesquisador) {
-		if (this.isAtivado()) {
-			if (this.getPesquisador() == null) {
-				this.setPesquisador(pesquisador);
-				return true;
-			} else {
-				return false;
-			}
-			
-		} else {
+	public boolean associaPesquisador(String emailPesquisador, Pesquisador pesquisador) {
+		if (this.isAtivado() == false) {
 			throw new IllegalArgumentException("Pesquisa desativada.");
+		} if (this.getPesquisadores().containsKey(emailPesquisador)) {
+			return false;
 		}
+		pesquisadores.put(emailPesquisador, pesquisador);
+		return true;
 	}
 
-	public Pesquisador getPesquisador() {
-		return pesquisador;
+	public Map<String, Pesquisador> getPesquisadores() {
+		return this.pesquisadores;
 	}
 
-	public void setPesquisador(Pesquisador pesquisador) {
-		this.pesquisador = pesquisador;
-	}
+	
 
-	public boolean desassociaPesquisador() {
+	public boolean desassociaPesquisador(String emailPesquisador) {
 		if (this.isAtivado()) {
-			if (this.getPesquisador() != null) {
-				this.setPesquisador(null);
+			if (this.getPesquisadores().containsKey(emailPesquisador)) {
+				pesquisadores.remove(emailPesquisador);
 				return true;
 			} else {
 				return false;

@@ -110,11 +110,51 @@ public class Pesquisador implements Serializable{
 	@Override
 	public String toString() {
 		return nome + " (" + funcao + ") - " + biografia + " - " + email
-				+ " - " + foto;
+				+ " - " + foto + " - " + this.especialidade.toString();
 	}
 
 	public void cadastraEspecialidadeProfessor(String formacao, String unidade, String data) {
 		this.especialidade = new Professor(formacao,unidade,data);
+		
+	}
+
+	public void cadastraEspecialidadeAluno(String email, int semestre, double iEA) {
+		this.especialidade = new Aluno(email, semestre, iEA);
+		
+	}
+
+	
+	public void alteraEspecialidadeAluno(String atributo, String novoValor) {
+		if (this.getFuncao().equals("estudante")) {
+			if (atributo.equalsIgnoreCase("semestre")) {
+				this.setSemestre(Integer.parseInt(novoValor));
+			} else if (atributo.equalsIgnoreCase("iea")) {
+				this.setIEA(Double.parseDouble(novoValor));
+			}
+		}
+		
+	}
+
+	private void setIEA(double parseDouble) {
+		this.especialidade.setIEA(parseDouble);
+	}
+
+	private void setSemestre(int i) {
+		this.especialidade.setSemestre(i);
+		
+	}
+
+	public void alteraEspecialidadeProfessor(String atributo, String novoValor) {
+		if (this.getFuncao().equals("professor")) {
+			if (atributo.equalsIgnoreCase("formacao")) {
+				this.especialidade.setFormacao(novoValor);
+			} else if (atributo.equalsIgnoreCase("unidade")) {
+				this.especialidade.setUnidade(novoValor);
+			}
+			else if (atributo.equalsIgnoreCase("data")) {
+				this.especialidade.setData(novoValor);
+			}
+		}
 		
 	}
 }

@@ -501,18 +501,18 @@ public class ControllerPesquisa implements Serializable{
 		return this.pesquisas.get(codigoPesquisa).atividadeMenosPendencias();
 	}
 	
-	public boolean associaPesquisador(String idPesquisa, Pesquisador pesquisador) {
+	public boolean associaPesquisador(String idPesquisa, String emailPesquisador, Pesquisador pesquisador) {
 		if (pesquisas.containsKey(idPesquisa)) {
-			return pesquisas.get(idPesquisa).associaPesquisador(pesquisador);
+			return pesquisas.get(idPesquisa).associaPesquisador(emailPesquisador,pesquisador);
 			
 		} else {
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");
 		}
 	}
 
-	public boolean desassociaPesquisador(String idPesquisa, Pesquisador pesquisador) {
+	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
 		if (pesquisas.containsKey(idPesquisa)) {
-			return pesquisas.get(idPesquisa).desassociaPesquisador();
+			return pesquisas.get(idPesquisa).desassociaPesquisador(emailPesquisador);
 			
 		} else {
 			throw new IllegalArgumentException("Pesquisa nao encontrada.");

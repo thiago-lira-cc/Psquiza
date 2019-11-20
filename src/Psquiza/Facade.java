@@ -213,4 +213,13 @@ public class Facade {
 	public void carregar() {
 		this.controlePsquiza.carrega();
 	}
+	
+	public void cadastraEspecialidadeAluno(String email, int semestre, double IEA) {
+		controlePsquiza.cadastraEspecialidadeAluno(email, semestre, IEA);
+	}
+	public String listaPesquisadores(String tipo) {
+		return controlePsquiza.listaPesquisadores(tipo);
+	}
+	
+	
 }

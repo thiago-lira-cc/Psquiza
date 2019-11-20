@@ -270,14 +270,14 @@ public class ControllerPsquiza implements Serializable{
 		excecoes.verificaString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		excecoes.verificaString(emailPesquisador, "Campo emailPesquisador nao pode ser nulo ou vazio.");
 		Pesquisador pesquisador = controlePesquisador.verificaBuscaPesquisador(emailPesquisador);
-		return controlePesquisa.associaPesquisador(idPesquisa, pesquisador);
+		return controlePesquisa.associaPesquisador(idPesquisa, emailPesquisador, pesquisador);
 	}
 
 	public boolean desassociaPesquisador(String idPesquisa, String emailPesquisador) {
 		excecoes.verificaString(idPesquisa, "Campo idPesquisa nao pode ser nulo ou vazio.");
 		excecoes.verificaString(emailPesquisador, "Campo emailPesquisador nao pode ser nulo ou vazio.");
 		Pesquisador pesquisador = controlePesquisador.verificaBuscaPesquisador(emailPesquisador);
-		return controlePesquisa.desassociaPesquisador(idPesquisa, pesquisador);
+		return controlePesquisa.desassociaPesquisador(idPesquisa, emailPesquisador);
 	}
 
 	public void cadastraEspecialidadeProfessor(String email, String formacao, String unidade, String data) {
@@ -285,6 +285,7 @@ public class ControllerPsquiza implements Serializable{
 		excecoes.verificaString(formacao, "Campo formacao nao pode ser nulo ou vazio.");
 		excecoes.verificaString(unidade, "Campo unidade nao pode ser nulo ou vazio.");
 		excecoes.verificaString(data, "Campo data nao pode ser nulo ou vazio.");
+		excecoes.verficaDataValida(data, "Atributo data com formato invalido.");
 		controlePesquisador.cadastraEspecialidadeProfessor(email, formacao, unidade, data);
 	}
 	
@@ -343,6 +344,20 @@ public class ControllerPsquiza implements Serializable{
 		this.controlePesquisa.carregar();
 		this.controlePesquisador.carregar();
 		this.controleProblema.carregar();
+	}
+
+	public void cadastraEspecialidadeAluno(String email, int semestre, double iEA) {
+		excecoes.verificaString(email, "Campo email nao pode ser nulo ou vazio.");
+		excecoes.verificaNumero(semestre, "Atributo semestre com formato invalido.");
+		excecoes.verificaIEA(iEA, "Atributo IEA com formato invalido.");
+		controlePesquisador.cadastraEspecialidadeAluno(email, semestre, iEA);
+		
+		
+	}
+
+	public String listaPesquisadores(String tipo) {
+		excecoes.verificaString(tipo, "Campo tipo nao pode ser nulo ou vazio.");
+		return controlePesquisador.listarPesquisadores(tipo);
 	}
 }
 
