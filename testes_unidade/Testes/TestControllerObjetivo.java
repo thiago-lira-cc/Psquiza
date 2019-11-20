@@ -77,6 +77,55 @@ class TestControllerObjetivo {
 		controleObjetivo.cadastraObjetivo("GERAL", "Obsevar a sexualidade alheia via tuiiiter", 1, 2);
 		assertEquals("O3",controleObjetivo.cadastraObjetivo("GERAL", "Obsevar a sexualidade alheia via tuiiiter", 1, 2));
 		assertEquals("O3 - GERAL - Obsevar a sexualidade alheia via tuiiiter - 3",controleObjetivo.exibeObjetivo("O3"));
+		//Teste campo objetivo vazio ou nulo
+		try {
+			controleObjetivo.exibeObjetivo(" ");
+		}
+		catch(IllegalArgumentException m){
+			
+		}
+		try {
+			controleObjetivo.exibeObjetivo(null);
+		}
+		catch(IllegalArgumentException m) {
+			
+		}
+		//Teste objetivo nao encontrado
+		try {
+			controleObjetivo.exibeObjetivo("B5");
+		}
+		catch(IllegalArgumentException m) {
+			
+		}
+	}
+	@Test
+	public void TestApagaObj() {
+		controleObjetivo.cadastraObjetivo("GERAL", "Obsevar a sexualidade alheia via tuiiiter", 1, 2);
+		assertEquals("O3",controleObjetivo.cadastraObjetivo("GERAL", "Obsevar a sexualidade alheia via tuiiiter", 1, 2));;
+		assertEquals(true, controleObjetivo.objetivoJaCadastrado("O3"));
+		controleObjetivo.apagarObjetivo("O3");
+		assertEquals(false, controleObjetivo.objetivoJaCadastrado("O3"));
+		
+		//teste codigo nulo ou vazio                            
+		try {
+			controleObjetivo.apagarObjetivo("");
+		}
+		catch(IllegalArgumentException m) {
+			
+		}
+		
+		try {
+			controleObjetivo.apagarObjetivo(null);
+		}
+		catch(IllegalArgumentException m) {
+			
+		}
+		try {
+			controleObjetivo.apagarObjetivo("M1");
+		}
+		catch(IllegalArgumentException m) {
+			
+		}
 	}
 }
 
