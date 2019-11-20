@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author Thiago Lira
  *
  */
-public class Pesquisador implements Serializable{
+public class Pesquisador implements Comparable<Pesquisador>, Serializable{
 	/**
 	 * 
 	 */
@@ -109,8 +109,14 @@ public class Pesquisador implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return nome + " (" + funcao + ") - " + biografia + " - " + email
-				+ " - " + foto + " - " + this.especialidade.toString();
+		if (this.especialidade == null) {
+			return nome + " (" + funcao + ") - " + biografia + " - " + email+ " - " 
+			+ foto;
+		} else {
+			return nome + " (" + funcao + ") - " + biografia + " - " + email+ " - " 
+					+ foto + " - " + this.especialidade.toString();
+		}
+				
 	}
 
 	public void cadastraEspecialidadeProfessor(String formacao, String unidade, String data) {
@@ -156,5 +162,10 @@ public class Pesquisador implements Serializable{
 			}
 		}
 		
+	}
+
+	@Override
+	public int compareTo(Pesquisador o) {
+		return this.toString().compareTo(o.toString());
 	}
 }

@@ -118,6 +118,7 @@ public class ControllerPesquisador implements Serializable{
 				excessoes.verificaNumero(Integer.parseInt(novoValor), "Atributo semestre com formato invalido.");
 				if (pesquisadores.get(email).getFuncao().equals("estudante")) {
 					pesquisadores.get(email).alteraEspecialidadeAluno(atributo,novoValor);
+					break;
 				} else {
 					throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
 				}
@@ -126,6 +127,7 @@ public class ControllerPesquisador implements Serializable{
 				excessoes.verificaIEA(Double.parseDouble(novoValor), "Atributo IEA com formato invalido.");
 				if (pesquisadores.get(email).getFuncao().equals("estudante")) {
 					pesquisadores.get(email).alteraEspecialidadeAluno(atributo, novoValor);
+					break;
 				} else {
 					throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
 				}
@@ -133,17 +135,26 @@ public class ControllerPesquisador implements Serializable{
 				excessoes.verificaString(novoValor, "Campo formacao nao pode ser nulo ou vazio.");
 				if (pesquisadores.get(email).getFuncao().equals("professor")) {
 					pesquisadores.get(email).alteraEspecialidadeProfessor(atributo, novoValor);
+					break;
+				} else {
+					throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
 				}
 			case "UNIDADE":
 				excessoes.verificaString(novoValor, "Campo formacao nao pode ser nulo ou vazio.");
 				if (pesquisadores.get(email).getFuncao().equals("professor")) {
 					pesquisadores.get(email).alteraEspecialidadeProfessor(atributo, novoValor);
+					break;
+				} else {
+					throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
 				}
 			case "DATA" :
 				excessoes.verificaString(novoValor, "Campo data nao pode ser vazio ou nulo");
 				excessoes.verficaDataValida(novoValor, "Atributo data com formato invalido.");
 				if (pesquisadores.get(email).getFuncao().equals("professor")) {
 					pesquisadores.get(email).alteraEspecialidadeProfessor(atributo, novoValor);
+					break;
+				} else {
+					throw new IllegalArgumentException("Pesquisador nao compativel com a especialidade.");
 				}
 			default:
 				throw new IllegalArgumentException("Atributo invalido.");
@@ -279,6 +290,40 @@ public class ControllerPesquisador implements Serializable{
 		} else {
 			throw new IllegalArgumentException("Pesquisadora nao encontrada.");
 		}	
+	}
+	public String listarPesquisadores(String tipo) {
+		excessoes.verificaString(tipo, "Campo tipo nao pode ser nulo ou vazio.");
+		if (!tipo.equals("EXTERNO") && !tipo.equals("PROFESSORA") && !tipo.equals("ALUNA")) {
+			throw new IllegalArgumentException("Tipo " + tipo + " inexistente.");
+		}
+		String res = "";
+		int cont = 0;
+		String novoTipo = null;
+		if (tipo.equals("EXTERNO")) {
+			novoTipo = "externo";
+		} else if (tipo.equals("ALUNA")) {
+			novoTipo = "estudante";
+		} else if (tipo.equals("PROFESSORA")) {
+			novoTipo = "professor";
+		}
+		List <Pesquisador> pesquisadores = new ArrayList<>();
+		for (Pesquisador pesquisador : this.pesquisadores.values()) {
+			if (pesquisador.getFuncao().equals(novoTipo)) {
+				pesquisadores.add(pesquisador);
+			}
+		}
+		
+		Collections.sort(pesquisadores);
+		Collections.reverse(pesquisadores);
+		 for (Pesquisador pesquisador : pesquisadores) {
+			 if (cont < pesquisadores.size() - 1) {
+				 res += pesquisador.toString() + " | ";
+				 cont++;
+			 } else {
+				 res += pesquisador.toString();
+			 }
+		 }
+		 return res;
 	}
 
 }
