@@ -1,13 +1,25 @@
 package Psquiza;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ControllerPesquisa{
+public class ControllerPesquisa implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2543350212940909005L;
+	
 	private Excecoes excecoes = new Excecoes();
 	/**
 	 * Mapa de pesquisadores identificados pelo codigo
@@ -533,6 +545,39 @@ public class ControllerPesquisa{
 		}
 		Pesquisa p = pesquisas.get(idPesquisa);
 		return p.resumeResultados();
+	}
+	/**
+	 * Metodo responsavel por realizar o salvamento dos dados em um arquivo.
+	 */
+	public void salvar() {
+		ObjectOutputStream os;
+		try {
+			os = new ObjectOutputStream(new FileOutputStream("./Logger/cPesquisa.txt"));
+			os.writeObject(this.pesquisas);
+			os.writeObject(this.estrategia);
+		} catch (FileNotFoundException e) {
+			throw new IllegalArgumentException("Arquivo nao existe no sistema.");
+		} catch (IOException e) {
+			System.out.println("Algum erro ocorreu...");
+		}
+	}
+	/**
+	 * Metodo responsavel por salvar os dados em um arquivo.
+	 */
+	@SuppressWarnings({ "unchecked", "resource" })
+	public void carregar() {
+		ObjectInputStream os;
+		try {
+			os = new ObjectInputStream(new FileInputStream("./Logger/cPesquisa.txt"));
+			this.pesquisas = (Map<String, Pesquisa>) os.readObject();
+			this.estrategia = (String) os.readObject();
+		} catch (FileNotFoundException e) {
+			throw new IllegalArgumentException("Arquivo nao existe no sistema.");
+		} catch (IOException e) {
+			System.out.println("Algum erro ocorre...");
+		} catch (ClassNotFoundException e) {
+			throw new IllegalArgumentException("Alguma coisa no sistema mudou");
+		}
 	}
 }
 

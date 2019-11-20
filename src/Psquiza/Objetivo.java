@@ -1,7 +1,13 @@
 package Psquiza;
 
-public class Objetivo implements Comparable<Objetivo>{
+import java.io.Serializable;
 
+public class Objetivo implements Comparable<Objetivo>, Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1956173619353668987L;
 	/**
 	 * o codigo identificador do objetivo
 	 */

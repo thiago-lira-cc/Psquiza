@@ -1,5 +1,6 @@
 package Psquiza;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,7 +15,11 @@ import java.util.Map;
  * @author Iele Passos
  *
  */
-public class Pesquisa implements Comparable<Pesquisa>{
+public class Pesquisa implements Comparable<Pesquisa>, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1263203464494175378L;
 	/**
 	 * A descricao da pesquisa.
 	 */

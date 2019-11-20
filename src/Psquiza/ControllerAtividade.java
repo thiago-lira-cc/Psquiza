@@ -1,5 +1,12 @@
 package Psquiza;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,7 +18,11 @@ import java.util.Map;
  * @author 
  *
  */
-public class ControllerAtividade{
+public class ControllerAtividade implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7077844415305687847L;
 	private Map <String, Atividade> atividades;
 	private Excecoes excecoes;
 	private int contCodigo;
@@ -365,5 +376,38 @@ public class ControllerAtividade{
 			throw new IllegalArgumentException("Nao existe proxima atividade.");
 		}
 		return atividades.get(idAtividade).pegaMaiorRisco(atividades.get(idAtividade).getProxima().getNivelDeRisco());
+	}
+	/**
+	 * Metodo responsavel por realizar o salvamento dos dados em um arquivo.
+	 */
+	public void salvar() {
+		ObjectOutputStream os;
+		try {
+			os = new ObjectOutputStream(new FileOutputStream("./Logger/cAtividade.txt"));
+			os.writeObject(this.atividades);
+			os.writeObject(this.contCodigo);
+		} catch (FileNotFoundException e) {
+			throw new IllegalArgumentException("Arquivo nao existe no sistema.");
+		} catch (IOException e) {
+			System.out.println("Algum erro ocorreu...");
+		}
+	}
+	/**
+	 * Metodo responsavel por salvar os dados em um arquivo.
+	 */
+	@SuppressWarnings({ "unchecked", "resource" })
+	public void carregar() {
+		ObjectInputStream os;
+		try {
+			os = new ObjectInputStream(new FileInputStream("./Logger/cAtividade.txt"));
+			this.atividades = (Map<String, Atividade>) os.readObject();
+			this.contCodigo = (int) os.readObject();
+		} catch (FileNotFoundException e) {
+			throw new IllegalArgumentException("Arquivo nao existe no sistema.");
+		} catch (IOException e) {
+			System.out.println("Algum erro ocorre...");
+		} catch (ClassNotFoundException e) {
+			throw new IllegalArgumentException("Alguma coisa no sistema mudou");
+		}
 	}
 }

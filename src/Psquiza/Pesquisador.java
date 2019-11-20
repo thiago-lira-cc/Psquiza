@@ -1,10 +1,17 @@
 package Psquiza;
+
+import java.io.Serializable;
+
 /**
  * Representacao de um pesquisador que tem nome, funcao, biografia, email, FotoURL e um status -ativado ou desativado
  * @author Thiago Lira
  *
  */
-public class Pesquisador {
+public class Pesquisador implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7814018579836109936L;
 	/**
 	 * NOme do pesquisador
 	 */

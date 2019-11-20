@@ -1,12 +1,23 @@
 package Psquiza;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ControllerProblema{
+public class ControllerProblema implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1696630821053147116L;
 	private Map<String, Problema> problemas;
 	private Excecoes excecoes;
 	private int contCodigo;
@@ -73,6 +84,39 @@ public class ControllerProblema{
 		}
 		Collections.sort(resultados);
 		return resultados;
+	}
+	/**
+	 * Metodo responsavel por realizar o salvamento dos dados em um arquivo.
+	 */
+	public void salvar() {
+		ObjectOutputStream os;
+		try {
+			os = new ObjectOutputStream(new FileOutputStream("./Logger/cProblema.txt"));
+			os.writeObject(this.problemas);
+			os.writeObject(this.contCodigo);
+		} catch (FileNotFoundException e) {
+			throw new IllegalArgumentException("Arquivo nao existe no sistema.");
+		} catch (IOException e) {
+			System.out.println("Algum erro ocorreu...");
+		}
+	}
+	/**
+	 * Metodo responsavel por salvar os dados em um arquivo.
+	 */
+	@SuppressWarnings({ "unchecked", "resource" })
+	public void carregar() {
+		ObjectInputStream os;
+		try {
+			os = new ObjectInputStream(new FileInputStream("./Logger/cProblema.txt"));
+			this.problemas = (Map<String, Problema>) os.readObject();
+			this.contCodigo = (int) os.readObject();
+		} catch (FileNotFoundException e) {
+			throw new IllegalArgumentException("Arquivo nao existe no sistema.");
+		} catch (IOException e) {
+			System.out.println("Algum erro ocorre...");
+		} catch (ClassNotFoundException e) {
+			throw new IllegalArgumentException("Alguma coisa no sistema mudou");
+		}
 	}
 
 }

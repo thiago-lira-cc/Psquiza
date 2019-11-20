@@ -3,11 +3,16 @@ package Psquiza;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ControllerPsquiza {
+public class ControllerPsquiza implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7842059612627523044L;
 	private Excecoes excecoes;
 	private ControllerPesquisa controlePesquisa;
 	private ControllerPesquisador controlePesquisador;
@@ -318,6 +323,26 @@ public class ControllerPsquiza {
 
 	public String pegaMaiorRisco(String idAtividade) {
 		return controleAtividade.pegaMaiorRisco(idAtividade);
+	}
+	/**
+	 * Metodo que salva as informacoes dos controllers
+	 */
+	public void salva() {
+		this.controleAtividade.salvar();
+		this.controleObjetivo.salvar();
+		this.controlePesquisa.salvar();
+		this.controlePesquisador.salvar();
+		this.controleProblema.salvar();
+	}
+	/**
+	 * Metodo que carrega as infromacoes dos controllers
+	 */
+	public void carrega() {
+		this.controleAtividade.carregar();
+		this.controleObjetivo.carregar();
+		this.controlePesquisa.carregar();
+		this.controlePesquisador.carregar();
+		this.controleProblema.carregar();
 	}
 }
 

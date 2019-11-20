@@ -1,5 +1,12 @@
 package Psquiza;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -10,7 +17,11 @@ import java.util.Map;
  * @author Thiago Lira
  *
  */
-public class ControllerPesquisador implements Especialidade{
+public class ControllerPesquisador implements Especialidade, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -17980619286674685L;
 	/**
 	 * Instancia a classe de excessoes
 	 */
@@ -193,6 +204,37 @@ public class ControllerPesquisador implements Especialidade{
 			}
 		} else {
 			throw new IllegalArgumentException("Pesquisadora nao encontrada.");
+		}
+	}
+	/**
+	 * Metodo responsavel por realizar o salvamento dos dados em um arquivo.
+	 */
+	public void salvar() {
+		ObjectOutputStream os;
+		try {
+			os = new ObjectOutputStream(new FileOutputStream("./Logger/cPesquisador.txt"));
+			os.writeObject(this.pesquisadores);
+		} catch (FileNotFoundException e) {
+			throw new IllegalArgumentException("Arquivo nao existe no sistema.");
+		} catch (IOException e) {
+			System.out.println("Algum erro ocorreu...");
+		}
+	}
+	/**
+	 * Metodo responsavel por salvar os dados em um arquivo.
+	 */
+	@SuppressWarnings({ "unchecked", "resource" })
+	public void carregar() {
+		ObjectInputStream os;
+		try {
+			os = new ObjectInputStream(new FileInputStream("./Logger/cPesquisador.txt"));
+			this.pesquisadores = (Map<String, Pesquisador>) os.readObject();
+		} catch (FileNotFoundException e) {
+			throw new IllegalArgumentException("Arquivo nao existe no sistema.");
+		} catch (IOException e) {
+			System.out.println("Algum erro ocorre...");
+		} catch (ClassNotFoundException e) {
+			throw new IllegalArgumentException("Alguma coisa no sistema mudou");
 		}
 	}
 

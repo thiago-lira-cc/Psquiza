@@ -1,7 +1,13 @@
 package Psquiza;
 
-public class Professor implements Especialidade{
+import java.io.Serializable;
 
+public class Professor implements Especialidade, Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8579078548171159782L;
 	private String formacao;
 	private String unidade;
 	private String data;

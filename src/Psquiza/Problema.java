@@ -1,6 +1,12 @@
 package Psquiza;
 
-public class Problema {
+import java.io.Serializable;
+
+public class Problema implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2454714748010116287L;
 	private String codigo;
 	private String descricao;
 	private int viabilidade;

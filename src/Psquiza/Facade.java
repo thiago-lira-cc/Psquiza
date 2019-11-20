@@ -14,14 +14,15 @@ public class Facade {
 				   "easyaccept/use_case_5.txt", "easyaccept/use_case_6.txt",
 				   "easyaccept/use_case_7.txt", "easyaccept/use_case_8.txt",
 				   "easyaccept/use_case_9.txt", "easyaccept/use_case_10.txt",
-				   "easyaccept/use_case_11.txt"};
+				   "easyaccept/use_case_11.txt", "easyaccept/use_case_12SALVAR.txt"};
 		EasyAccept.main(args);
+		
 	}
 	
 	public Facade() {
 		this.controlePsquiza = new ControllerPsquiza();
 	}
-	
+
 	public String cadastraPesquisa(String descricao, String campoDeInteresse) {
 		return controlePsquiza.cadastraPesquisa(descricao, campoDeInteresse);
 	}
@@ -205,5 +206,11 @@ public class Facade {
 	
 	public void gravarResultados(String idPesquisa) throws IOException {
 		controlePsquiza.gravarResultados(idPesquisa);
+	}
+	public void salvar() {
+		this.controlePsquiza.salva();
+	}
+	public void carregar() {
+		this.controlePsquiza.carrega();
 	}
 }

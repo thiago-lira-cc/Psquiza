@@ -1,4 +1,11 @@
 package Psquiza;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,7 +18,11 @@ import java.util.Map;
  *
  */
 
-public class ControllerObjetivo{
+public class ControllerObjetivo implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7955807656918874477L;
 	/**
 	 * Mapa de objetivos identificados pelo codigo
 	 */
@@ -128,6 +139,39 @@ public class ControllerObjetivo{
 		}
 		Collections.sort(resultados);
 		return resultados;
+	}
+	/**
+	 * Metodo responsavel por realizar o salvamento dos dados em um arquivo.
+	 */
+	public void salvar() {
+		ObjectOutputStream os;
+		try {
+			os = new ObjectOutputStream(new FileOutputStream("./Logger/cObjetivo.txt"));
+			os.writeObject(this.objetivos);
+			os.writeObject(this.contCodigo);
+		} catch (FileNotFoundException e) {
+			throw new IllegalArgumentException("Arquivo nao existe no sistema.");
+		} catch (IOException e) {
+			System.out.println("Algum erro ocorreu...");
+		}
+	}
+	/**
+	 * Metodo responsavel por salvar os dados em um arquivo.
+	 */
+	@SuppressWarnings({ "unchecked", "resource" })
+	public void carregar() {
+		ObjectInputStream os;
+		try {
+			os = new ObjectInputStream(new FileInputStream("./Logger/cObjetivo.txt"));
+			this.objetivos = (Map<String, Objetivo>) os.readObject();
+			this.contCodigo = (int) os.readObject();
+		} catch (FileNotFoundException e) {
+			throw new IllegalArgumentException("Arquivo nao existe no sistema.");
+		} catch (IOException e) {
+			System.out.println("Algum erro ocorre...");
+		} catch (ClassNotFoundException e) {
+			throw new IllegalArgumentException("Alguma coisa no sistema mudou");
+		}
 	}
 
 }

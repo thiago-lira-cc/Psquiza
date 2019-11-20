@@ -1,6 +1,12 @@
 package Psquiza;
 
-public class Item  implements Comparable<Item>{
+import java.io.Serializable;
+
+public class Item  implements Comparable<Item>, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5246153798773027002L;
 	private Integer indice;
 	private String item;
 	private String status;

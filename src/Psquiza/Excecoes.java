@@ -1,10 +1,17 @@
 package Psquiza;
+
+import java.io.Serializable;
+
 /**
  * Classe responsavel pela verificacao de formatos e excessoes
  * @author Thiago Lira, Kleberson Maria, Ricardo Felix e Iele Passos
  *
  */
-public class Excecoes {
+public class Excecoes implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2715061879036174552L;
 	/**
 	 * Verifica se uma string é vazia ou nula
 	 * @param atributo

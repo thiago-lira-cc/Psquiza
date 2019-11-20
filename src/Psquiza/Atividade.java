@@ -1,12 +1,17 @@
 package Psquiza;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Atividade implements Comparable<Atividade>{
+public class Atividade implements Comparable<Atividade>, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8493702775882752428L;
 	private String descricao;
 	private String nivelRisco;
 	private String descricaoRisco;
