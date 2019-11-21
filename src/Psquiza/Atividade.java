@@ -199,7 +199,7 @@ public class Atividade implements Comparable<Atividade>, Serializable{
 		int cont = 1;
 		resul += "- "+toString()+System.lineSeparator()+"   ";
 		for (Item i : this.itens.values()) {
-			resul += "- "+i.getStatus()+" - ITEM"+cont;
+			resul += "- "+i.getStatus()+" - ITEM"+cont+System.lineSeparator();
 			cont++;
 		}
 		return resul;
@@ -209,8 +209,7 @@ public class Atividade implements Comparable<Atividade>, Serializable{
 	 * @return os resultados da atividade
 	 */
 	public String resultadosAtividade() {
-		String resul = "- Resultados:"+System.lineSeparator()+"    - "
-				+this.descricao+System.lineSeparator();
+		String resul = "- "+this.descricao+System.lineSeparator();
 		return resul+representaResultados();
 	}
 	
@@ -224,7 +223,7 @@ public class Atividade implements Comparable<Atividade>, Serializable{
 		int cont = 1;
 		for (Item i : this.itens.values()) {
 			if (i.getStatus().equals("REALIZADO")) {
-				resul += "   - ITEM"+cont+" - "+(duracao/itens.size())+System.lineSeparator();
+				resul += "   - ITEM"+cont+" - "+(duracao/contaItensRealizados())+System.lineSeparator();
 				cont++;
 			}
 		}
@@ -233,7 +232,7 @@ public class Atividade implements Comparable<Atividade>, Serializable{
 		}
 		return resul;
 	}
-
+	
 	public String pegaMaiorRisco(String risco) {
 		if (proxima!=null&&!(proxima.temRiscoMaior(risco).equals(""))) {
 			return proxima.pegaMaiorRisco(this.temRiscoMaior(risco));

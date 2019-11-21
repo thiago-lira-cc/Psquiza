@@ -80,7 +80,7 @@ public class Pesquisa implements Comparable<Pesquisa>, Serializable{
 		this.qtdObjetivos = 0;
 		this.ativAssociada = false;
 		this.atividades = new LinkedHashMap<>();
-		this.pesquisadores = new HashMap<>();
+		this.pesquisadores = new LinkedHashMap<>();
 	}
 	
 	/**
@@ -375,13 +375,13 @@ public class Pesquisa implements Comparable<Pesquisa>, Serializable{
 	public String geraResumo(String idPesquisa) {
 		String result = "- Pesquisa: " + toString();
 		result +=System.lineSeparator() + "   - Pesquisadores:"+System.lineSeparator();
-		/*for (Pesquisador pesquisador : pesquisadores) {
+		for (Pesquisador pesquisador : this.pesquisadores.values()) {
 			result += "   - "+pesquisador.toString()+System.lineSeparator();
-		}*/
+		}
 		result += "- Problema:"+System.lineSeparator()+"   - "+this.problema.toString()+System.lineSeparator();
 		result += "- Objetivos:"+System.lineSeparator();
 		for (Objetivo o : this.objetivos.values()) {
-			result += "   - "+o.toString();
+			result += "   - "+o.toString()+System.lineSeparator();
 		}
 		result += "- Atividades:"+System.lineSeparator();
 		for (Atividade a : this.atividades.values()) {
@@ -397,11 +397,12 @@ public class Pesquisa implements Comparable<Pesquisa>, Serializable{
 	public String resumeResultados() {
 		String result = "- Pesquisa: " + toString();
 		if (atividades.size()>0) {
-			result += System.lineSeparator() + "   ";
+			result += System.lineSeparator() + "   - Resultados:"+System.lineSeparator()+"    ";
 			for (Atividade a : this.atividades.values()) {
 				result += a.resultadosAtividade();
 			}
 		}
 		return result;
 	}
+	
 }
