@@ -19,19 +19,18 @@ class TesteControllerProblema {
 		controleProblema.cadastraProblema("Fome em cuba", 3);
 	}
 	
-	
-	@Test
-	public void testCadastraDescricaoVazia() {
+	@Test void cadastraProblema(){
+		
+	// teste Cadastra Descricao Vazia
 		try {
 			controleProblema.cadastraProblema("", 3);
 			fail();
 		} catch (IllegalArgumentException m) {
 			
 		}
-	}
 	
-	@Test
-	public void testCadastraViabilidadeInvalida() {
+	
+	// teste Cadastra Viabilidade Invalida
 		try {
 			controleProblema.cadastraProblema("Fome em cuba", -1);
 			fail();

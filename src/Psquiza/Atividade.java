@@ -23,6 +23,13 @@ public class Atividade implements Comparable<Atividade>, Serializable{
 	private int duracao;
 	private Atividade proxima;
 	
+	/**
+	 * Construtor da classe
+	 * @param descricao
+	 * @param nivelRisco
+	 * @param descricaoRisco
+	 * @param codigo
+	 */
 	public Atividade(String descricao, String nivelRisco, String descricaoRisco, String codigo) {
 		this.descricao = descricao;
 		this.nivelRisco = nivelRisco;
@@ -66,11 +73,17 @@ public class Atividade implements Comparable<Atividade>, Serializable{
 			return false;
 		return true;
 	}
-
+	/**
+	 * Metodo responsavel por gerar indices 
+	 * @return
+	 */
 	public Integer geraIndice() {
 		return itens.size() + 1;
 	}
-	
+	/**
+	 * Metodo responsavel por cadastrar um item no sistema
+	 * @param item
+	 */
 	public void cadastraItem(String item) {
 		Integer indice = geraIndice();
 		if (!itens.containsKey(indice)) {
@@ -78,7 +91,10 @@ public class Atividade implements Comparable<Atividade>, Serializable{
 			itens.put(indice, novoItem);
 		}
 	}
-
+	/**
+	 * Metodo responsavel pela exibicao de atividades
+	 * @return uma lista de atividades
+	 */
 	public String exibeAtividade() {
 		String res = "";
 		if (itens.size() != 0) {
@@ -101,6 +117,9 @@ public class Atividade implements Comparable<Atividade>, Serializable{
 		return res;
 	}
 
+	/**
+	 * Representacao em String 
+	 */
 	@Override
 	public String toString() {
 		return this.descricao + " (" + this.nivelRisco + " - " + this.descricaoRisco + ")";
@@ -117,7 +136,10 @@ public class Atividade implements Comparable<Atividade>, Serializable{
 	public String getCodigo() {
 		return codigo;
 	}
-	
+	/**
+	 * Metodo responsavel por contar os itens que ainda nao foram realizados
+	 * @return retorna a quantidade de itens nao realizados
+	 */
 	public int contaItensPendentes() {
 		int cont = 0;
 		for (Item item : itens.values()) {
@@ -128,7 +150,10 @@ public class Atividade implements Comparable<Atividade>, Serializable{
 		return cont;
 		
 	}
-
+	/**
+	 * Metodo responsavel por contar os itens ja realizados
+	 * @return retoena a quantidade de itens realizados
+	 */
 	public int contaItensRealizados() {
 		int cont = 0;
 		for (Item item : itens.values()) {
@@ -157,7 +182,11 @@ public class Atividade implements Comparable<Atividade>, Serializable{
 	public void setDuracao(int duracao) {
 		this.duracao = duracao;
 	}
-	
+	/**
+	 * Metoro responsavel por executar um item
+	 * @param item
+	 * @param duracao
+	 */
 	public void executaItem(int item, int duracao) {
 		if(item >itens.size() || item <= 0) {
 			throw new IllegalArgumentException("Item nao encontrado.");
@@ -165,11 +194,20 @@ public class Atividade implements Comparable<Atividade>, Serializable{
 		this.itens.get(item).realizar();
 		this.duracao += duracao;
 	}
-
+	/**
+	 * Metodo responsavel por cadastrar um resultado no sistema
+	 * @param resultado
+	 * @return retorna o numero do resultado
+	 */
 	public int cadastraResultado(String resultado) {
 		resultados.put(++numeroDoResultado,resultado);
 		return numeroDoResultado;
 	}
+	/**
+	 * Metodo responsavel por remover um resultado cadastrado
+	 * @param numeroDoResultado o numero do resultado
+	 * @return retorna se a remocao ocorreu
+	 */
 	public boolean removeResultado(int numeroDoResultado) {
 		if(resultados.containsKey(numeroDoResultado)){
 			this.resultados.remove(numeroDoResultado);
@@ -177,7 +215,10 @@ public class Atividade implements Comparable<Atividade>, Serializable{
 		}
 		throw new IllegalArgumentException("Resultado nao encontrado.");
 	}
-
+	/**
+	 * Metodo responavel por listar os resultados
+	 * @return retorna uma lista de resultados
+	 */
 	public String listaResultados() {
 		String retorna = "";
 		for(String resultado:this.resultados.values()) {

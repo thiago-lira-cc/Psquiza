@@ -26,50 +26,54 @@ class TestControllerObjetivo {
 	}
 	@Test
 	public void testCadastraObjetivo() {
-	assertEquals("O2",controleObjetivo.cadastraObjetivo("GERAL", "Provar que a terra nao eh plana utilizando um globo", 5, 5));
+		assertEquals("O2",controleObjetivo.cadastraObjetivo("GERAL", "Provar que a terra nao eh plana utilizando um globo", 5, 5));
 
 
 	//Campos de pesquisa nulos ou vazios
-	try {
-	controleObjetivo.cadastraObjetivo(null, "Testar a inteligencia de animais marinhos usando oleo", 3, 2);
-	}
-	catch(IllegalArgumentException m) {
+		try {
+			controleObjetivo.cadastraObjetivo(null, "Testar a inteligencia de animais marinhos usando oleo", 3, 2);
+		}
+		catch(IllegalArgumentException m) {
 
-	}
-	try {
-	controleObjetivo.cadastraObjetivo("GERAL", null, 3, 2);
-	}
-	catch(IllegalArgumentException m) {
+		}
+		try {
+			controleObjetivo.cadastraObjetivo("GERAL", null, 3, 2);
+		}
+		catch(IllegalArgumentException m) {
 
-	}
-	try {
-	controleObjetivo.cadastraObjetivo(" ", "Testar a inteligencia de animais marinhos usando oleo", 3, 2);
-	}
-	catch(IllegalArgumentException m) {
+		}
+		try {
+			controleObjetivo.cadastraObjetivo(" ", "Testar a inteligencia de animais marinhos usando oleo", 3, 2);
+		}
+		catch(IllegalArgumentException m) {
 
-	}
-	try {
-	controleObjetivo.cadastraObjetivo("GERAL"," ", 3, 2);
-	}
-	catch(IllegalArgumentException m) {
-	}
-	//Valores invalidos
-	try {
-	controleObjetivo.cadastraObjetivo("GERAL", "Testar a inteligencia de animais marinhos usando oleo", 10, 2);
-	}
-	catch(IllegalArgumentException m) {
-	}
-	try {
-	controleObjetivo.cadastraObjetivo("GERAL", "Testar a inteligencia de animais marinhos usando oleo", 3, 0);
-	}
-	catch(IllegalArgumentException m) {
-	}
-	//tipo invalido
-	try {
-	controleObjetivo.cadastraObjetivo("MINSTROLOUCO", "Testar a inteligencia de animais marinhos usando oleo", 10, 2);
-	}
-	catch(IllegalArgumentException m) {
-	}
+		}
+		try {
+			controleObjetivo.cadastraObjetivo("GERAL"," ", 3, 2);
+		}
+		catch(IllegalArgumentException m) {
+			
+		}
+		//Valores invalidos
+		try {
+			controleObjetivo.cadastraObjetivo("GERAL", "Testar a inteligencia de animais marinhos usando oleo", 10, 2);
+		}
+		catch(IllegalArgumentException m) {
+			
+		}
+		try {
+			controleObjetivo.cadastraObjetivo("GERAL", "Testar a inteligencia de animais marinhos usando oleo", 3, 0);
+		}
+		catch(IllegalArgumentException m) {
+			
+		}
+		//tipo invalido
+		try {
+			controleObjetivo.cadastraObjetivo("MINSTROLOUCO", "Testar a inteligencia de animais marinhos usando oleo", 10, 2);
+		}
+		catch(IllegalArgumentException m) {
+			
+		}
 	
 	}
 	@Test

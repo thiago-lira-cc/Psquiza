@@ -66,6 +66,7 @@ public class Pesquisa implements Comparable<Pesquisa>, Serializable{
 	
 	/**
 	 * Constroi uma pesquisa no sistema.
+	 * 
 	 * @param descricao
 	 * @param campoDeInteresse
 	 * @param codigo
@@ -116,12 +117,13 @@ public class Pesquisa implements Comparable<Pesquisa>, Serializable{
 		return true;
 	}
 	/**
-	 * associa um objetivo a uma pesquisa. Cada objetivo so
+	 * Associa um objetivo a uma pesquisa. Cada objetivo so
 	 * pode estar associado a uma pesquisa, no entanto, uma pesquisa
 	 * pode estar associada a varios objetivos
+	 * 
 	 * @param idObjetivo
 	 * @param o objetivo
-	 * @return se a associacao foi bem sucedida
+	 * @return retorna se a associacao foi bem sucedida
 	 */
 	public boolean associaObjetivo(String idObjetivo, Objetivo o) {
 		if (isAtivado()==false) {
@@ -138,9 +140,10 @@ public class Pesquisa implements Comparable<Pesquisa>, Serializable{
 			
 	}
 	/**
-	 * desassocia um objetivo de uma pesquisa
+	 * Desassocia um objetivo de uma pesquisa
+	 * 
 	 * @param o objetivo
-	 * @return se a desassociacao foi bem sucedida
+	 * @return retorna se a desassociacao foi bem sucedida
 	 */
 	public boolean desassociaObjetivo(Objetivo o) {
 		if (isAtivado()==false) {
@@ -155,6 +158,7 @@ public class Pesquisa implements Comparable<Pesquisa>, Serializable{
 	}
 	/**
 	 * Gera uma lista de objetivos ordenada pelo maior ID
+	 * 
 	 * @return uma lista de objetivos ordenada
 	 */
 	public List<Objetivo> listaObjetivos() {
@@ -183,7 +187,8 @@ public class Pesquisa implements Comparable<Pesquisa>, Serializable{
 	}
 
 	/**
-	 * Metodo que desassocia uma atividad ede uma pesquisa
+	 * Metodo que desassocia uma atividade de uma pesquisa
+	 * 
 	 * @param a
 	 * @return
 	 */
@@ -274,51 +279,86 @@ public class Pesquisa implements Comparable<Pesquisa>, Serializable{
 		}
 		return menoresPendencias.getCodigo();
 	}
-
+	/**
+	 * Permite que a quatidade de objetivos seja acessada
+	 * @return
+	 */
 	public int getQtdObjetivos() {
 		return qtdObjetivos;
 	}
-	
+	/**
+	 * Retorna se a atividade esta associada a uma pesquisa.
+	 * @return
+	 */
 	public boolean isAtivAssociada() {
 		return ativAssociada;
 	}
-	
+	/**
+	 * Permite que o mapa de atividades seja acessado
+	 * @return as atividades
+	 */
 	public Map<String, Atividade> getAtividades() {
 		return atividades;
 	}
-	
+	/**
+	 * Retorna se ha um problema associado a uma atividade
+	 * @return
+	 */
 	public boolean isAssociada() {
 		return isAssociada;
 	}
-
+	/**
+	 * Permite que o o status relacionado a associacao de problema seja alterado
+	 * @param isAssociada
+	 */
 	public void setAssociada(boolean isAssociada) {
 		this.isAssociada = isAssociada;
 	}
-
+	/**
+	 * Permite que a descricao seja acessada
+	 * @return
+	 */
 	public String getDescricao() {
 		return descricao;
 	}
-
+	/**
+	 * Permite que da descricao seja alterada
+	 * @param descricao
+	 */
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
+	/*
+	 * Permite que o capo de interesse de uma pesquisa seja acessado.
+	 */
 	public String getCampoDeInteresse() {
 		return campoDeInteresse;
 	}
-
+	/**
+	 * Permite que o campo de interesse seja alterado.
+	 * @param campoDeInteresse
+	 */
 	public void setCampoDeInteresse(String campoDeInteresse) {
 		this.campoDeInteresse = campoDeInteresse;
 	}
-
+	/**
+	 * Retorna se o status da pesquisa esta ativado ou nao
+	 * @return retorna o status da pesquisa
+	 */
 	public boolean isAtivado() {
 		return ativado;
 	}
-
+	/**
+	 * Permite que um novo valor seja atribuido ao status de uma pesquisa
+	 * @param ativado
+	 */
 	public void setAtivado(boolean ativado) {
 		this.ativado = ativado;
 	}
-	
+	/**
+	 * Permite que o codigo da pesquisa seja acessado
+	 * @return retorna o codigo da pesquisa
+	 */
 	public String getCodigo() {
 		return this.codigo;
 	}
